@@ -1,0 +1,23 @@
+.profilePage_myPosts {
+  margin-top: 10px;
+  border: 1px solid black;
+}
+.profilePage_myPosts > div {
+  border: 1px solid black;
+}
+.profilePage_myPosts textarea {
+  display: block;
+  width: 100%;
+  resize: none;
+}
+.profilePage_myPosts button {
+  width: 80px;
+  margin-top: 10px;
+  padding: 5px;
+  background-color: blueviolet;
+  color: white;
+  font-weight: bold;
+  border: none;
+}
+
+/*# sourceMappingURL=MyPosts.module.css..map */

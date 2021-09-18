@@ -1,0 +1,15 @@
+.profilePage {
+  width: 80%;
+  border: 1px solid black;
+
+  &_img {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+  }
+}

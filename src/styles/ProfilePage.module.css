@@ -1,0 +1,15 @@
+.profilePage {
+  width: 80%;
+  border: 1px solid black;
+}
+.profilePage_img {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+.profilePage_img img {
+  display: block;
+  max-width: 100%;
+}
+
+/*# sourceMappingURL=ProfilePage.module.css..map */

@@ -1,0 +1,17 @@
+.sidebar {
+  width: 20%;
+  min-width: 145px;
+  margin-right: 5px;
+  background-color: rgba(21,0,74,0.95);
+  border: 1px solid black;
+
+  &>div {
+    width: 100%;
+    text-align: center;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
+}
