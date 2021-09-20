@@ -2,8 +2,6 @@ import React from 'react';
 /*import './styles/Reset.css';*/
 import './App.css';
 
-
-
 import Sidebar from "./Components/Sidebar/Sidebar";
 import ProfilePage from "./Components/ProfilePage/ProfilePage";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import s from './../../../styles/AboutMe.module.css';
 import myAva from './../../../images/ava.jpg';
-import Avatar from "../../Avatar/Avatar";
+import Avatar, {AvatarStylesType} from "../../Avatar/Avatar";
 
 
 type AboutMeType = {
@@ -13,12 +13,20 @@ type AboutMeType = {
 }
 
 function AboutMe(props: AboutMeType) {
+
+    const styles: AvatarStylesType = {
+
+        styles: {
+            width: '100px',
+            height: '100px',
+            minWidth: '100px'
+        },
+        avatar: myAva
+    }
+
     return (
         <div className={s.profilePage_aboutMe}>
-            <div className={s.profilePage_aboutMe_avatar}>
-                <img src={props.avatar} alt=""/>
-            </div>
-            {/*<Avatar width='100px' height='100px' minWidth='100px' avatar={ava}/>*/}
+            <Avatar styles={styles.styles} avatar={styles.avatar}/>
             <div className={s.profilePage_aboutMe_info}>
                 <h2>{props.name}</h2>
                 <div>Date of birth: {props.birthDate}</div>
