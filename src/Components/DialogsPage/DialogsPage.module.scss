@@ -1,0 +1,35 @@
+.dialogsPage {
+  display: flex;
+  width: 80%;
+  border: 1px solid black;
+
+  &_chats {
+    width: 20%;
+    min-width: 150px;
+    padding: 10px;
+    border: 1px solid black;
+
+    & div {
+      margin-bottom: 10px;
+
+      &:before {
+        content: '*';
+        display: inline-block;
+        margin-right: 10px;
+        vertical-align: middle;
+      }
+    }
+
+    & a {
+      text-decoration: none;
+    }
+  }
+
+  &_dialog {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 80%;
+    border: 1px solid black;
+  }
+}

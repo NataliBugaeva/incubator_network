@@ -13,5 +13,12 @@
   text-decoration: none;
   color: white;
 }
+.sidebar a.active {
+  color: gold;
+}
+
+/*.sidebar a.active {
+  color: gold;
+}*/
 
 /*# sourceMappingURL=Sidebar.module.css..map */

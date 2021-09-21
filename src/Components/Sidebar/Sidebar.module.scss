@@ -13,5 +13,16 @@
   a {
     text-decoration: none;
     color: white;
+
+    &.active {
+      color: gold;
+    }
   }
 }
+
+/*.sidebar a.active {
+  color: gold;
+}*/
+
+
+

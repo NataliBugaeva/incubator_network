@@ -1,0 +1,32 @@
+.dialogsPage {
+  display: flex;
+  width: 80%;
+  border: 1px solid black;
+}
+.dialogsPage_chats {
+  width: 20%;
+  min-width: 150px;
+  padding: 10px;
+  border: 1px solid black;
+}
+.dialogsPage_chats div {
+  margin-bottom: 10px;
+}
+.dialogsPage_chats div:before {
+  content: "*";
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.dialogsPage_chats a {
+  text-decoration: none;
+}
+.dialogsPage_dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 80%;
+  border: 1px solid black;
+}
+
+/*# sourceMappingURL=DialogsPage.module.css..map */
