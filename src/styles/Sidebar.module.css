@@ -17,8 +17,15 @@
   color: gold;
 }
 
-/*.sidebar a.active {
-  color: gold;
-}*/
+.friendsPage {
+  margin: 30px 0;
+}
+.friendsPage_blockWithFriendsAva {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border: 1px solid white;
+  margin: 10px;
+}
 
 /*# sourceMappingURL=Sidebar.module.css..map */

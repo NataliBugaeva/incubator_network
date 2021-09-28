@@ -1,9 +1,18 @@
 import React from "react";
 import s from '../../../styles/MyPosts.module.css';
 import Post from "./Post/Post";
-import ava from './../../../images/ava.jpg';
+import {PostType} from "../../../redux/state";
 
-function MyPosts() {
+
+function MyPosts(props: { myPosts: Array<PostType> }) {
+    const myPosts = props.myPosts.map(elem => {
+        return <Post ava={elem.ava}
+                     id={elem.id}
+                     name={elem.name}
+                     likesCount={elem.likesCount}
+                     key={elem.id}/>
+    })
+
     return (
         <div className={s.profilePage_myPosts}>
             <h2>My posts</h2>
@@ -11,12 +20,9 @@ function MyPosts() {
                 <textarea name="" id="" cols={30} rows={5}></textarea>
             </div>
             <button>Send</button>
-
-            <Post avatar={ava} name={'user1'} likesCount={5}/>
-            <Post avatar={ava} name={'user2'} likesCount={7}/>
-            <Post avatar={ava} name={'user3'} likesCount={3}/>
-            <Post avatar={ava} name={'user4'} likesCount={9}/>
+            {myPosts}
         </div>
     )
 }
+
 export default MyPosts;

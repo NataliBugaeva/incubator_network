@@ -1,0 +1,10 @@
+.friend {
+  width: 42px;
+  border: 1px solid white;
+  margin-bottom: 5px;
+
+  &_name {
+    color: white;
+    font-size: 10px;
+  }
+}

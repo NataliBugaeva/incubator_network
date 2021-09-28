@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["../components/sidebar/Sidebar.module.scss"],"names":[],"mappings":"AAAA;EACE;EACA;EACA;EACA;EACA;;AAEA;EACE;EACA;;AAGF;EACE;EACA;;AAEA;EACE;;;AAKN;AAAA;AAAA","file":"Sidebar.module.css."}
+{"version":3,"sourceRoot":"","sources":["../components/sidebar/Sidebar.module.scss"],"names":[],"mappings":"AAAA;EACE;EACA;EACA;EACA;EACA;;AAEA;EACE;EACA;;AAGF;EACE;EACA;;AAEA;EACE;;;AAKN;EACE;;AAEA;EACE;EACA;EACA;EACA;EACA","file":"Sidebar.module.css."}

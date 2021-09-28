@@ -2,9 +2,9 @@ import React from "react";
 import s from '../../styles/Avatar.module.css';
 
 export type AvatarType = {
-        width: string,
-        height: string,
-        minWidth: string
+    width: string,
+    height: string,
+    minWidth: string
 }
 
 export type AvatarStylesType = {

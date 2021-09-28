@@ -2,15 +2,8 @@ import React from "react";
 import s from './../../../styles/AboutMe.module.css';
 import myAva from './../../../images/ava.jpg';
 import Avatar, {AvatarStylesType} from "../../Avatar/Avatar";
+import {AboutMeType} from "../../../redux/state";
 
-
-type AboutMeType = {
-    avatar: any,
-    name: string,
-    birthDate: string,
-    city: string,
-    education: string
-}
 
 function AboutMe(props: AboutMeType) {
 
