@@ -13,7 +13,7 @@ function Message(props: MessageType) {
 
                 <div className={s.message_text}>
                     <div>{props.name}:</div>
-                    <div>{props.message}</div>
+                    <div className={s.text}>{props.message}</div>
                     <div>{props.time}</div>
                     <div className={s.test}></div>
                 </div>

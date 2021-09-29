@@ -2,13 +2,13 @@ import React, {ChangeEvent} from "react";
 import s from './../../styles/DialogsPage.module.css';
 import Message from "./Message/Message";
 import Chat from "./Chat/Chat";
-import {DialogsPageType} from "../../redux/state";
+import {AllActionType, DialogsPageType} from "../../redux/state";
 
-import {onMessageTextChangeActionCreator, sendNewMessageActionCreator} from "../../redux/state";
+import {onMessageTextChangeActionCreator, sendNewMessageActionCreator} from "../../redux/dialogsReducer";
 
 function DialogsPage(props: {
     dialogsPage: DialogsPageType,
-    dispatch: (action: any) => void
+    dispatch: (action: AllActionType) => void
 }) {
 
     let onChangeMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {

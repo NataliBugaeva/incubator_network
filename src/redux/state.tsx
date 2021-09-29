@@ -2,6 +2,15 @@ import ava from "../images/ava.jpg";
 import friendAva from './../images/almo.jpg';
 import postAva from './../images/kermit.jpg';
 import {v1} from "uuid";
+import profileReducer, {
+    addNewPostActionCreator, AddNewPostActionCreatorReturnedType,
+    onPostChangeActionCreator, OnPostChangeActionCreatorReturnedType
+} from "./profileReducer";
+import dialogsReducer, {
+    onMessageTextChangeActionCreator, OnMessageTextChangeActionCreatorReturnedType,
+    sendNewMessageActionCreator, SendNewMessageActionCreatorReturnedType
+} from "./dialogsReducer";
+import sidebarReducer from "./sidebarReducer";
 
 export type StateType = {
     profilePage: ProfilePageType,
@@ -51,18 +60,25 @@ export type FriendTypeInSidebar = {
     ava: string
 }
 
+/*export type AllActionType =
+    | ReturnType<typeof onMessageTextChangeActionCreator>
+    | ReturnType<typeof sendNewMessageActionCreator>
+    | ReturnType<typeof addNewPostActionCreator>
+    | ReturnType<typeof onPostChangeActionCreator>*/
+
+export type AllActionType =
+    | OnMessageTextChangeActionCreatorReturnedType
+    | SendNewMessageActionCreatorReturnedType
+    | OnPostChangeActionCreatorReturnedType
+    | AddNewPostActionCreatorReturnedType
+
 export type StoreType = {
     _state: StateType,
     getState: () => StateType,
     _callSubscriber: (state: StateType) => void,
-    dispatch: (action: any) => void,
+    dispatch: (action: AllActionType) => void,
     subscribe: (observer: (state: StateType) => void) => void
 }
-
-const ON_POST_CHANGE = 'ON-POST-CHANGE',
-      ADD_NEW_POST = 'ADD-NEW-POST',
-      ON_MESSAGE_TEXT_CHANGE = 'ON-MESSAGE-TEXT-CHANGE',
-      SEND_NEW_MESSAGE = 'SEND-NEW-MESSAGE';
 
 
 export const store: StoreType = {
@@ -189,52 +205,11 @@ export const store: StoreType = {
     },
 
     dispatch(action) {
-        switch (action.type) {
-            case 'ADD-NEW-POST':
-                let newPost = {
-                    id: v1(),
-                    name: this._state.profilePage.newPostText,
-                    likesCount: 0,
-                    ava: postAva
-                }
-                this._state.profilePage.myPosts = [newPost, ...this._state.profilePage.myPosts];
-                this._state.profilePage.newPostText = '';
-                this._callSubscriber(this._state);
-                break;
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action);
 
-            case 'ON-POST-CHANGE':
-                this._state.profilePage.newPostText = action.text;
-                this._callSubscriber(this._state);
-                break;
-
-            case 'ON-MESSAGE-TEXT-CHANGE':
-                this._state.dialogsPage.messageText = action.text;
-                this._callSubscriber(this._state);
-                break;
-
-            case 'SEND-NEW-MESSAGE':
-                let newMessage = {
-                    id: v1(),
-                    avatar: ava,
-                    name: 'Natali',
-                    message: this._state.dialogsPage.messageText,
-                    time: `${new Date().getHours()} : ${new Date().getMinutes()}`
-                };
-                this._state.dialogsPage.messages = [...this._state.dialogsPage.messages, newMessage];
-                this._state.dialogsPage.messageText = '';
-                this._callSubscriber(this._state);
-                break;
-
-            default:
-                break;
-        }
+        this._callSubscriber(this._state);
     }
-
 }
-
-export const onPostChangeActionCreator = (text: string) => ({type: ON_POST_CHANGE, text: text});
-export const addNewPostActionCreator = () => ({type: ADD_NEW_POST});
-
-export const onMessageTextChangeActionCreator = (text: string) => ({type: ON_MESSAGE_TEXT_CHANGE, text: text});
-export const sendNewMessageActionCreator = () => ({type: SEND_NEW_MESSAGE});
 
