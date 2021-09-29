@@ -1,5 +1,5 @@
 .dialogsPage {
-  display: flex;
+  /*  display: flex;*/
   width: 80%;
   border: 1px solid black;
 }
@@ -27,6 +27,32 @@
   align-items: flex-end;
   width: 80%;
   border: 1px solid black;
+}
+
+.wrapper {
+  display: flex;
+}
+
+.newMessage {
+  border: 1px solid black;
+  padding: 10px;
+  margin-top: 10px;
+}
+.newMessage textarea {
+  display: block;
+  resize: none;
+  width: 90%;
+  height: 50px;
+}
+.newMessage button {
+  display: block;
+  width: 80px;
+  margin-top: 10px;
+  padding: 5px;
+  background-color: blueviolet;
+  color: white;
+  font-weight: bold;
+  border: none;
 }
 
 /*# sourceMappingURL=DialogsPage.module.css..map */

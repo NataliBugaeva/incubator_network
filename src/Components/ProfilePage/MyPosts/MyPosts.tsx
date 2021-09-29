@@ -1,14 +1,14 @@
 import React, {ChangeEvent} from "react";
 import s from '../../../styles/MyPosts.module.css';
 import Post from "./Post/Post";
-import {PostType} from "../../../redux/state";
+import {addNewPostActionCreator, onPostChangeActionCreator, PostType} from "../../../redux/state";
+
 
 
 function MyPosts(props: {
     myPosts: Array<PostType>,
     newPostText: string,
-    onPostChange: (text: string) => void,
-    addNewPost: () => void
+    dispatch: (action: any) => void
 }) {
 
     const myPosts = props.myPosts.map(elem => {
@@ -20,11 +20,11 @@ function MyPosts(props: {
     })
 
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.onPostChange(e.currentTarget.value);
+        props.dispatch(onPostChangeActionCreator(e.currentTarget.value));
     }
 
     const addNewPost = () => {
-        props.addNewPost();
+        props.dispatch(addNewPostActionCreator());
     }
 
     return (

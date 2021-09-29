@@ -12,21 +12,20 @@ import SettingsPage from "./Components/SettingsPage/SettingsPage";
 import {StateType} from "./redux/state";
 import FriendsPage from "./Components/FriendsPage/FriendsPage";
 
-import {addNewPost} from "./redux/state";
-import {onPostChange} from "./redux/state";
 
-
-function App(props: { state: StateType }) {
+function App(props: {
+    state: StateType,
+    dispatch: (action: any) => void
+}) {
     return (
         <div className="app">
             <Header/>
             <div className='mainPart'>
                 <Sidebar friends={props.state.sidebar.friends}/>
                 <Route render={() => <ProfilePage profilePage={props.state.profilePage}
-                                                  onPostChange={onPostChange}
-                                                  addNewPost={addNewPost}/>} path='/profile'/>
-                <Route render={() => <DialogsPage messages={props.state.dialogsPage.messages}
-                                                  chats={props.state.dialogsPage.chats}/>} path='/dialogs'/>
+                                                  dispatch={props.dispatch}/>} path='/profile'/>
+                <Route render={() => <DialogsPage dialogsPage={props.state.dialogsPage}
+                                                  dispatch={props.dispatch}/>} path='/dialogs'/>
                 <Route render={() => <NewsPage/>} path='/news'/>
                 <Route render={() => <MusicPage/>} path='/music'/>
                 <Route render={() => <SettingsPage/>} path='/settings'/>

@@ -8,8 +8,7 @@ import {ProfilePageType} from "../../redux/state";
 
 function ProfilePage(props: {
     profilePage: ProfilePageType,
-    onPostChange: (text: string) => void,
-    addNewPost: () => void
+    dispatch: (action: any) => void
 }) {
     return (
         <div className={s.profilePage}>
@@ -20,8 +19,7 @@ function ProfilePage(props: {
                      city={props.profilePage.aboutMe.city} education={props.profilePage.aboutMe.education}/>
             <MyPosts myPosts={props.profilePage.myPosts}
                      newPostText={props.profilePage.newPostText}
-                     onPostChange={props.onPostChange}
-                     addNewPost={props.addNewPost}/>
+                     dispatch={props.dispatch}/>
         </div>
     )
 }
