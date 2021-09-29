@@ -6,15 +6,22 @@ import MyPosts from "./MyPosts/MyPosts";
 import {ProfilePageType} from "../../redux/state";
 
 
-function ProfilePage(props: ProfilePageType) {
+function ProfilePage(props: {
+    profilePage: ProfilePageType,
+    onPostChange: (text: string) => void,
+    addNewPost: () => void
+}) {
     return (
         <div className={s.profilePage}>
             <div className={s.profilePage_img}>
                 <img src={city} alt="city"/>
             </div>
-            <AboutMe name={props.aboutMe.name}  birthDate={props.aboutMe.birthDate}
-                     city={props.aboutMe.city} education={props.aboutMe.education}/>
-            <MyPosts myPosts={props.myPosts}/>
+            <AboutMe name={props.profilePage.aboutMe.name} birthDate={props.profilePage.aboutMe.birthDate}
+                     city={props.profilePage.aboutMe.city} education={props.profilePage.aboutMe.education}/>
+            <MyPosts myPosts={props.profilePage.myPosts}
+                     newPostText={props.profilePage.newPostText}
+                     onPostChange={props.onPostChange}
+                     addNewPost={props.addNewPost}/>
         </div>
     )
 }

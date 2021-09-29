@@ -2,6 +2,11 @@ import ava from "../images/ava.jpg";
 import friendAva from './../images/almo.jpg';
 import postAva from './../images/kermit.jpg';
 import {v1} from "uuid";
+/*import {rerenderEntireTree} from "../index";*/
+
+let rerenderEntireTree = (state: StateType) => {
+
+}
 
 export type StateType = {
     profilePage: ProfilePageType,
@@ -9,6 +14,7 @@ export type StateType = {
     sidebar: SidebarType
 }
 export type ProfilePageType = {
+    newPostText: string,
     aboutMe: AboutMeType,
     myPosts: Array<PostType>
 }
@@ -51,6 +57,7 @@ export type FriendTypeInSidebar = {
 
 export const state: StateType = {
     profilePage: {
+        newPostText: '',
         aboutMe: {
             name: 'Natasha Bugaeva',
             birthDate: '26 of December',
@@ -159,6 +166,26 @@ export const state: StateType = {
             }
         ]
     }
-
 }
 
+
+export const addNewPost = () => {
+    let newPost = {
+        id: v1(),
+        name: state.profilePage.newPostText,
+        likesCount: 0,
+        ava: postAva
+    }
+    state.profilePage.myPosts = [newPost, ...state.profilePage.myPosts];
+    onPostChange('');
+    rerenderEntireTree(state);
+}
+
+export const onPostChange = (text: string) => {
+    state.profilePage.newPostText = text;
+    rerenderEntireTree(state);
+}
+
+export const subscribe = (observer: (state: StateType) => void) => {
+    rerenderEntireTree = observer;
+}
