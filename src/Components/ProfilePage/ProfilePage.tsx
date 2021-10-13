@@ -3,12 +3,12 @@ import s from './../../styles/ProfilePage.module.css';
 import city from './../../images/city2.jpg';
 import AboutMe from "./AboutMe/AboutMe";
 import MyPosts from "./MyPosts/MyPosts";
-import {ProfilePageType} from "../../redux/state";
+import {AllActionType, ProfilePageType} from "../../redux/state";
 
 
 function ProfilePage(props: {
     profilePage: ProfilePageType,
-    dispatch: (action: any) => void
+    dispatch: (action: AllActionType) => void
 }) {
     return (
         <div className={s.profilePage}>

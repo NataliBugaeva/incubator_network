@@ -9,13 +9,13 @@ import {Route} from "react-router-dom";
 import NewsPage from "./Components/NewsPage/NewsPage";
 import MusicPage from "./Components/MusicPage/MusicPage";
 import SettingsPage from "./Components/SettingsPage/SettingsPage";
-import {StateType} from "./redux/state";
+import {AllActionType, StateType} from "./redux/state";
 import FriendsPage from "./Components/FriendsPage/FriendsPage";
 
 
 function App(props: {
     state: StateType,
-    dispatch: (action: any) => void
+    dispatch: (action: AllActionType) => void
 }) {
     return (
         <div className="app">

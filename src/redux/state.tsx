@@ -2,14 +2,8 @@ import ava from "../images/ava.jpg";
 import friendAva from './../images/almo.jpg';
 import postAva from './../images/kermit.jpg';
 import {v1} from "uuid";
-import profileReducer, {
-    addNewPostActionCreator, AddNewPostActionCreatorReturnedType,
-    onPostChangeActionCreator, OnPostChangeActionCreatorReturnedType
-} from "./profileReducer";
-import dialogsReducer, {
-    onMessageTextChangeActionCreator, OnMessageTextChangeActionCreatorReturnedType,
-    sendNewMessageActionCreator, SendNewMessageActionCreatorReturnedType
-} from "./dialogsReducer";
+import profileReducer, {addNewPostActionCreator, onPostChangeActionCreator} from "./profileReducer";
+import dialogsReducer, {onMessageTextChangeActionCreator,sendNewMessageActionCreator} from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
 
 export type StateType = {
@@ -60,17 +54,11 @@ export type FriendTypeInSidebar = {
     ava: string
 }
 
-/*export type AllActionType =
+export type AllActionType =
     | ReturnType<typeof onMessageTextChangeActionCreator>
     | ReturnType<typeof sendNewMessageActionCreator>
     | ReturnType<typeof addNewPostActionCreator>
-    | ReturnType<typeof onPostChangeActionCreator>*/
-
-export type AllActionType =
-    | OnMessageTextChangeActionCreatorReturnedType
-    | SendNewMessageActionCreatorReturnedType
-    | OnPostChangeActionCreatorReturnedType
-    | AddNewPostActionCreatorReturnedType
+    | ReturnType<typeof onPostChangeActionCreator>
 
 export type StoreType = {
     _state: StateType,

@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from "react";
 import s from '../../../styles/MyPosts.module.css';
 import Post from "./Post/Post";
-import {PostType} from "../../../redux/state";
+import {AllActionType, PostType} from "../../../redux/state";
 import{addNewPostActionCreator, onPostChangeActionCreator} from './../../../redux/profileReducer';
 
 
@@ -9,7 +9,7 @@ import{addNewPostActionCreator, onPostChangeActionCreator} from './../../../redu
 function MyPosts(props: {
     myPosts: Array<PostType>,
     newPostText: string,
-    dispatch: (action: any) => void
+    dispatch: (action: AllActionType) => void
 }) {
 
     const myPosts = props.myPosts.map(elem => {

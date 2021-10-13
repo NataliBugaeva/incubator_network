@@ -31,16 +31,12 @@ function profileReducer(state: ProfilePageType, action: AllActionType) {
     }
 }
 
-export type OnPostChangeActionCreatorReturnedType = {type: typeof ON_POST_CHANGE, text: string};
-export type AddNewPostActionCreatorReturnedType = {type: typeof ADD_NEW_POST};
 
-export const onPostChangeActionCreator = (text: string): OnPostChangeActionCreatorReturnedType => {
-    return {
+export const onPostChangeActionCreator = (text: string) => ({
         type: ON_POST_CHANGE,
         text: text
-    };
-}
+    } as const);
 
-export const addNewPostActionCreator = (): AddNewPostActionCreatorReturnedType => ({type: ADD_NEW_POST});
+export const addNewPostActionCreator = () => ({type: ADD_NEW_POST} as const);
 
 export default profileReducer;

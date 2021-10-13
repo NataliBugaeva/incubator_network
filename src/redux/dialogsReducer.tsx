@@ -5,11 +5,10 @@ import ava from "../images/ava.jpg";
 const ON_MESSAGE_TEXT_CHANGE = 'ON-MESSAGE-TEXT-CHANGE';
 const SEND_NEW_MESSAGE = 'SEND-NEW-MESSAGE';
 
-/*export type AllActionTypesOfDialogsReducer =
-    | SendNewMessageActionCreatorReturnedType
-    | OnMessageTextChangeActionCreatorReturnedType;*/
 
 const dialogsReducer = (state: DialogsPageType, action: AllActionType): DialogsPageType => {
+    let minutes = new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes();
+
     switch (action.type) {
         case ON_MESSAGE_TEXT_CHANGE:
             state.messageText = action.text;
@@ -21,7 +20,7 @@ const dialogsReducer = (state: DialogsPageType, action: AllActionType): DialogsP
                 avatar: ava,
                 name: 'Natali',
                 message: state.messageText,
-                time: `${new Date().getHours()} : ${new Date().getMinutes()}`
+                time: `${new Date().getHours()} : ${minutes}`
             };
             state.messages = [...state.messages, newMessage];
             state.messageText = '';
@@ -32,13 +31,10 @@ const dialogsReducer = (state: DialogsPageType, action: AllActionType): DialogsP
     }
 }
 
-export type OnMessageTextChangeActionCreatorReturnedType = {type: typeof ON_MESSAGE_TEXT_CHANGE, text: string};
-export type SendNewMessageActionCreatorReturnedType = {type: typeof SEND_NEW_MESSAGE};
-
-export const onMessageTextChangeActionCreator = (text: string): OnMessageTextChangeActionCreatorReturnedType => ({
+export const onMessageTextChangeActionCreator = (text: string)=> ({
     type: ON_MESSAGE_TEXT_CHANGE,
     text: text
-});
-export const sendNewMessageActionCreator = (): SendNewMessageActionCreatorReturnedType => ({type: SEND_NEW_MESSAGE});
+} as const);
+export const sendNewMessageActionCreator = () => ({type: SEND_NEW_MESSAGE} as const);
 
 export default dialogsReducer;
