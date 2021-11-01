@@ -13,7 +13,6 @@ import {AllActionType} from "./types";
 import ProfilePageContainer from "./Components/ProfilePage/ProfilePageContainer";
 import DialogsPageContainer from "./Components/DialogsPage/DialogsPageContainer";
 import {RootState, StoreType} from "./redux/store";
-import StoreContext from "./StoreContext";
 
 
 
