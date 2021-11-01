@@ -1,8 +1,7 @@
 import React from "react";
 import s from './../../../../styles/Post.module.css';
 import Avatar, {AvatarStylesType} from "../../../Avatar/Avatar";
-import myAva from "../../../../images/kermit.jpg";
-import {PostType} from "../../../../redux/state";
+import {PostType} from "../../../../types";
 
 
 

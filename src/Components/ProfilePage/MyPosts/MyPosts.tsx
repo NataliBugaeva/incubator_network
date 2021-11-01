@@ -1,15 +1,17 @@
 import React, {ChangeEvent} from "react";
 import s from '../../../styles/MyPosts.module.css';
 import Post from "./Post/Post";
-import {AllActionType, PostType} from "../../../redux/state";
 import{addNewPostActionCreator, onPostChangeActionCreator} from './../../../redux/profileReducer';
+import {AllActionType, PostType} from "../../../types";
 
 
 
 function MyPosts(props: {
     myPosts: Array<PostType>,
     newPostText: string,
-    dispatch: (action: AllActionType) => void
+    onPostChange: (value: string) => void,
+    onAddNewPost: () => void
+   /* dispatch: (action: AllActionType) => void*/
 }) {
 
     const myPosts = props.myPosts.map(elem => {
@@ -21,11 +23,13 @@ function MyPosts(props: {
     })
 
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(onPostChangeActionCreator(e.currentTarget.value));
+        props.onPostChange(e.currentTarget.value)
+        /*props.dispatch(onPostChangeActionCreator(e.currentTarget.value));*/
     }
 
     const addNewPost = () => {
-        props.dispatch(addNewPostActionCreator());
+        props.onAddNewPost();
+        /*props.dispatch(addNewPostActionCreator());*/
     }
 
     return (

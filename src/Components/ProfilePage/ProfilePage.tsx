@@ -3,12 +3,13 @@ import s from './../../styles/ProfilePage.module.css';
 import city from './../../images/city2.jpg';
 import AboutMe from "./AboutMe/AboutMe";
 import MyPosts from "./MyPosts/MyPosts";
-import {AllActionType, ProfilePageType} from "../../redux/state";
+import {AllActionType, ProfilePageType} from "../../types";
 
 
 function ProfilePage(props: {
     profilePage: ProfilePageType,
-    dispatch: (action: AllActionType) => void
+    onPostChange: (value: string) => void,
+    onAddNewPost: () => void
 }) {
     return (
         <div className={s.profilePage}>
@@ -19,7 +20,9 @@ function ProfilePage(props: {
                      city={props.profilePage.aboutMe.city} education={props.profilePage.aboutMe.education}/>
             <MyPosts myPosts={props.profilePage.myPosts}
                      newPostText={props.profilePage.newPostText}
-                     dispatch={props.dispatch}/>
+                     onPostChange={props.onPostChange}
+                     onAddNewPost={props.onAddNewPost}
+                    /* dispatch={props.dispatch}*//>
         </div>
     )
 }

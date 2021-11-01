@@ -1,15 +1,41 @@
 import {v1} from "uuid";
 import postAva from "../images/kermit.jpg";
-import {AllActionType, ProfilePageType} from "./state";
+import {AllActionType, ProfilePageType} from "../types";
 
 const ON_POST_CHANGE = 'ON-POST-CHANGE';
 const ADD_NEW_POST = 'ADD-NEW-POST';
 
-/*export type AllActionTypesOfProfileReducer =
-    | OnPostChangeActionCreatorReturnedType
-    | AddNewPostActionCreatorReturnedType;*/
+let initialState: ProfilePageType = {
+    newPostText: '',
+    aboutMe: {
+        name: 'Natasha Bugaeva',
+        birthDate: '26 of December',
+        city: 'Minsk',
+        education: 'higher'
+    },
+    myPosts: [
+        {
+            id: v1(),
+            name: 'Alice',
+            likesCount: 5,
+            ava: postAva
+        },
+        {
+            id: v1(),
+            name: 'Julia',
+            likesCount: 7,
+            ava: postAva
+        },
+        {
+            id: v1(),
+            name: 'Kate',
+            likesCount: 9,
+            ava: postAva
+        }
+    ]
+}
 
-function profileReducer(state: ProfilePageType, action: AllActionType) {
+function profileReducer(state: ProfilePageType = initialState, action: AllActionType): ProfilePageType {
     switch (action.type) {
         case ADD_NEW_POST:
             let newPost = {
@@ -18,13 +44,16 @@ function profileReducer(state: ProfilePageType, action: AllActionType) {
                 likesCount: 0,
                 ava: postAva
             }
-            state.myPosts = [newPost, ...state.myPosts];
-            state.newPostText = '';
-            return state;
+            //state.myPosts = [newPost, ...state.myPosts];
+            //state.newPostText = '';
+           // return state;
+            return {...state, myPosts:[newPost, ...state.myPosts], newPostText: ''}
+
 
         case ON_POST_CHANGE:
-            state.newPostText = action.text;
-            return state;
+          //  state.newPostText = action.text;
+           // return state;
+            return {...state, newPostText: action.text}
 
         default:
             return state;

@@ -1,8 +1,7 @@
 import React from "react";
 import s from './../../../styles/Friend.module.css';
 import Avatar, {AvatarStylesType} from "../../Avatar/Avatar";
-import myAva from "../../../images/almo.jpg";
-import {FriendTypeInSidebar} from "../../../redux/state";
+import {FriendTypeInSidebar} from "../../../types";
 
 
 function Friend(props: FriendTypeInSidebar) {

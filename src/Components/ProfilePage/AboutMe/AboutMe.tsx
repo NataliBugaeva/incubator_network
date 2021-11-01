@@ -2,7 +2,7 @@ import React from "react";
 import s from './../../../styles/AboutMe.module.css';
 import myAva from './../../../images/ava.jpg';
 import Avatar, {AvatarStylesType} from "../../Avatar/Avatar";
-import {AboutMeType} from "../../../redux/state";
+import {AboutMeType} from "../../../types";
 
 
 function AboutMe(props: AboutMeType) {

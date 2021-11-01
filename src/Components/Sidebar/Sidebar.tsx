@@ -1,8 +1,8 @@
 import React from "react";
 import s from '../../styles/Sidebar.module.css';
 import {NavLink} from 'react-router-dom';
-import {SidebarType} from "../../redux/state";
 import Friend from "./Friend/Friend";
+import {SidebarType} from "../../types";
 
 
 function Sidebar(props: SidebarType) {

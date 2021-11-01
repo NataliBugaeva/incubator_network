@@ -1,7 +1,7 @@
 import React from "react";
 import s from './../../../styles/Chat.module.css';
 import {NavLink} from "react-router-dom";
-import {ChatType} from "../../../redux/state";
+import {ChatType} from "../../../types";
 
 
 

@@ -6,61 +6,63 @@ import profileReducer, {addNewPostActionCreator, onPostChangeActionCreator} from
 import dialogsReducer, {onMessageTextChangeActionCreator,sendNewMessageActionCreator} from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
 
-export type StateType = {
+ type StateType = {
     profilePage: ProfilePageType,
     dialogsPage: DialogsPageType,
     sidebar: SidebarType
 }
-export type ProfilePageType = {
+
+ type ProfilePageType = {
     newPostText: string,
     aboutMe: AboutMeType,
     myPosts: Array<PostType>
 }
-export type AboutMeType = {
+ type AboutMeType = {
     name: string,
     birthDate: string,
     city: string,
     education: string
 }
-export type PostType = {
+ type PostType = {
     id: string,
     name: string,
     likesCount: number,
     ava: string
 }
 
-export type DialogsPageType = {
+type DialogsPageType = {
     chats: Array<ChatType>,
     messages: Array<MessageType>,
     messageText: string
 }
-export type MessageType = {
+ type MessageType = {
     id: string,
     avatar: string,
     name: string,
     message: string,
     time: string
 }
-export type ChatType = {
+ type ChatType = {
     id: string,
     name: string
 }
-export type SidebarType = {
+
+ type SidebarType = {
     friends: Array<FriendTypeInSidebar>
 }
-export type FriendTypeInSidebar = {
+ type FriendTypeInSidebar = {
     id: string,
     name: string,
     ava: string
 }
 
-export type AllActionType =
+ type AllActionType =
     | ReturnType<typeof onMessageTextChangeActionCreator>
     | ReturnType<typeof sendNewMessageActionCreator>
     | ReturnType<typeof addNewPostActionCreator>
     | ReturnType<typeof onPostChangeActionCreator>
 
-export type StoreType = {
+ type StoreType = {
     _state: StateType,
     getState: () => StateType,
     _callSubscriber: (state: StateType) => void,
@@ -69,7 +71,7 @@ export type StoreType = {
 }
 
 
-export const store: StoreType = {
+ const store: StoreType = {
     _state: {
         profilePage: {
             newPostText: '',
