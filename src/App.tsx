@@ -18,11 +18,11 @@ import StoreContext from "./StoreContext";
 
 
 
-function App(props: {
+function App(/*props: {
     store: StoreType,
     state: RootState,
     dispatch: (action: AllActionType) => void
-}) {
+}*/) {
 
     return (
 
@@ -30,12 +30,12 @@ function App(props: {
 
             <Header/>
             <div className='mainPart'>
-                <Sidebar friends={props.state.sidebar.friends}/>
+                {/*<Sidebar friends={props.state.sidebar.friends}/>
                 <Route render={() => <ProfilePageContainer profilePage={props.state.profilePage}
                                                   dispatch={props.dispatch}/>} path='/profile'/>
-                <Route render={() => <DialogsPageContainer store={props.store}/>} path='/dialogs'/>
-                {/*<Route render={() => <ProfilePageContainer/>} path='/profile'/>
-                <Route render={() => <DialogsPageContainer/>} path='/dialogs'/>*/}
+                <Route render={() => <DialogsPageContainer store={props.store}/>} path='/dialogs'/>*/}
+                <Route render={() => <ProfilePageContainer/>} path='/profile'/>
+                <Route render={() => <DialogsPageContainer/>} path='/dialogs'/>
                 <Route render={() => <NewsPage/>} path='/news'/>
                 <Route render={() => <MusicPage/>} path='/music'/>
                 <Route render={() => <SettingsPage/>} path='/settings'/>
