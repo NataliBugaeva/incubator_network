@@ -13,26 +13,17 @@ import {AllActionType} from "./types";
 import ProfilePageContainer from "./Components/ProfilePage/ProfilePageContainer";
 import DialogsPageContainer from "./Components/DialogsPage/DialogsPageContainer";
 import {RootState, StoreType} from "./redux/store";
+import SidebarContainer from "./Components/Sidebar/SidebarContainer";
 
 
 
 
-function App(/*props: {
-    store: StoreType,
-    state: RootState,
-    dispatch: (action: AllActionType) => void
-}*/) {
-
+function App() {
     return (
-
         <div className="app">
-
             <Header/>
             <div className='mainPart'>
-                {/*<Sidebar friends={props.state.sidebar.friends}/>
-                <Route render={() => <ProfilePageContainer profilePage={props.state.profilePage}
-                                                  dispatch={props.dispatch}/>} path='/profile'/>
-                <Route render={() => <DialogsPageContainer store={props.store}/>} path='/dialogs'/>*/}
+                <SidebarContainer />
                 <Route render={() => <ProfilePageContainer/>} path='/profile'/>
                 <Route render={() => <DialogsPageContainer/>} path='/dialogs'/>
                 <Route render={() => <NewsPage/>} path='/news'/>

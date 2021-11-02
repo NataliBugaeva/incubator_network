@@ -3,12 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
-/*import {store, StateType} from './redux/state';*/
 import store, {RootState} from "./redux/store";
 import {BrowserRouter} from "react-router-dom";
-import {Provider} from "./StoreContext";
-//import {StateType} from "./types";
+import {Provider} from "react-redux";
 
 
 let rerenderEntireTree = (state: RootState) => {
