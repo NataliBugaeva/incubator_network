@@ -4,7 +4,6 @@ import myAva from './../../../images/ava.jpg';
 import Avatar, {AvatarStylesType} from "../../Avatar/Avatar";
 import {AboutMeType} from "../../../types";
 
-
 function AboutMe(props: AboutMeType) {
 
     const styles: AvatarStylesType = {

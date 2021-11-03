@@ -3,7 +3,6 @@ import s from './../../../styles/Friend.module.css';
 import Avatar, {AvatarStylesType} from "../../Avatar/Avatar";
 import {FriendTypeInSidebar} from "../../../types";
 
-
 function Friend(props: FriendTypeInSidebar) {
     const styles: AvatarStylesType = {
 

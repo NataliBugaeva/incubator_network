@@ -3,7 +3,7 @@ import s from './../../styles/ProfilePage.module.css';
 import city from './../../images/city2.jpg';
 import AboutMe from "./AboutMe/AboutMe";
 import MyPosts from "./MyPosts/MyPosts";
-import {AllActionType, ProfilePageType} from "../../types";
+import {ProfilePageType} from "../../types";
 
 
 function ProfilePage(props: {
@@ -21,8 +21,7 @@ function ProfilePage(props: {
             <MyPosts myPosts={props.profilePage.myPosts}
                      newPostText={props.profilePage.newPostText}
                      onPostChange={props.onPostChange}
-                     onAddNewPost={props.onAddNewPost}
-                    /* dispatch={props.dispatch}*//>
+                     onAddNewPost={props.onAddNewPost}/>
         </div>
     )
 }

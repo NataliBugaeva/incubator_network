@@ -1,5 +1,6 @@
 import {onMessageTextChangeActionCreator, sendNewMessageActionCreator} from "./redux/dialogsReducer";
 import {addNewPostActionCreator, onPostChangeActionCreator} from "./redux/profileReducer";
+import {FollowUnfollowAC, SetUsersAC} from "./redux/usersReducer";
 
 /*export type StateType = {
     profilePage: ProfilePageType,
@@ -51,11 +52,30 @@ export type FriendTypeInSidebar = {
     ava: string
 }
 
+export type UsersPageType = {
+    users: Array<UserType>
+}
+export type UserType = {
+    id: string,
+    followed: boolean,
+    ava: string,
+    fullName: string,
+    status: string,
+    location: LocationType
+}
+export type LocationType = {
+    city: string,
+    country: string
+}
+
+
 export type AllActionType =
     | ReturnType<typeof onMessageTextChangeActionCreator>
     | ReturnType<typeof sendNewMessageActionCreator>
     | ReturnType<typeof addNewPostActionCreator>
     | ReturnType<typeof onPostChangeActionCreator>
+    | ReturnType<typeof FollowUnfollowAC>
+    | ReturnType<typeof SetUsersAC>
 
 /*
 export type StoreType = {

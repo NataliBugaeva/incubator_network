@@ -61,8 +61,6 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: AllAction
 
     switch (action.type) {
         case ON_MESSAGE_TEXT_CHANGE:
-            //state.messageText = action.text;
-            //return state;
             return {...state, messageText: action.text}
 
         case SEND_NEW_MESSAGE:
@@ -73,9 +71,6 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: AllAction
                 message: state.messageText,
                 time: `${new Date().getHours()} : ${minutes}`
             };
-            // state.messages = [...state.messages, newMessage, ];
-            //state.messageText = '';
-            //return state;
             return {...state, messages: [...state.messages, newMessage], messageText: ''}
 
 

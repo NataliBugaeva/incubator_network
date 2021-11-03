@@ -1,0 +1,40 @@
+.user_block {
+  display: flex;
+  margin: 0 0 15px;
+  padding: 3px;
+}
+.user_block_with_ava {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.user_block_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid rgba(21, 0, 74, 0.95);
+  width: 100%;
+}
+.user_block_info_top {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.user_block_info_bottom {
+  display: flex;
+  width: 100%;
+}
+
+button {
+  display: block;
+  width: 80px;
+  margin-top: 10px;
+  padding: 5px;
+  background-color: blueviolet;
+  color: white;
+  font-weight: bold;
+  border: none;
+}
+
+/*# sourceMappingURL=User.module.css..map */

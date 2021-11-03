@@ -44,15 +44,10 @@ function profileReducer(state: ProfilePageType = initialState, action: AllAction
                 likesCount: 0,
                 ava: postAva
             }
-            //state.myPosts = [newPost, ...state.myPosts];
-            //state.newPostText = '';
-           // return state;
             return {...state, myPosts:[newPost, ...state.myPosts], newPostText: ''}
 
 
         case ON_POST_CHANGE:
-          //  state.newPostText = action.text;
-           // return state;
             return {...state, newPostText: action.text}
 
         default:

@@ -3,8 +3,6 @@ import s from './../../../../styles/Post.module.css';
 import Avatar, {AvatarStylesType} from "../../../Avatar/Avatar";
 import {PostType} from "../../../../types";
 
-
-
 function Post(props: PostType) {
 
     const styles: AvatarStylesType = {

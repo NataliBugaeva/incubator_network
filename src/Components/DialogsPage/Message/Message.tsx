@@ -17,8 +17,6 @@ function Message(props: MessageType) {
                     <div>{props.time}</div>
                     <div className={s.test}></div>
                 </div>
-
-
             </div>
         </div>
     )
