@@ -56,17 +56,22 @@ export type UsersPageType = {
     users: Array<UserType>
 }
 export type UserType = {
-    id: string,
+    id: number,
     followed: boolean,
-    ava: string,
-    fullName: string,
+    photos: {
+        large: string,
+        small: string
+    }
+    name: string,
     status: string,
-    location: LocationType
+   // location: LocationType
 }
-export type LocationType = {
+
+
+/*export type LocationType = {
     city: string,
     country: string
-}
+}*/
 
 
 export type AllActionType =

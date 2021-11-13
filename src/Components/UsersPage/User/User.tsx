@@ -1,16 +1,14 @@
 import React from "react";
-import {LocationType, UserType} from "../../../types";
 import s from './../../../styles/User.module.css'
 import Avatar, {AvatarStylesType} from "../../Avatar/Avatar";
 
 export type UserPropsType = {
-    id: string,
+    id: number,
     followed: boolean,
     ava: string,
-    fullName: string,
+    name: string,
     status: string,
-    location: LocationType,
-    followUser: (userId: string) => void
+    followUser: (userId: number) => void
 }
 
 const User = (props: UserPropsType) => {
@@ -40,8 +38,7 @@ const User = (props: UserPropsType) => {
 
             <div className={s.user_block_info}>
                 <div className={s.user_block_info_top}>
-                    <div>{props.fullName}</div>
-                    <div>{props.location.country}, {props.location.city}</div>
+                    <div>{props.name}</div>
                 </div>
                 
                 <div className={s.user_block_info_bottom}>
