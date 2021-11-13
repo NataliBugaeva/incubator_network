@@ -19,34 +19,34 @@ const instance = axios.create({
     }
 })
 
-const UsersPage = (props: UsersPagePropsType) => {
+//здесь д.б. типизация пропсов и типизация стэйта. Но какой здесь стэйт???
+class UsersPage extends React.Component<UsersPagePropsType, {}> {
+    //componentDidMount вызывается один единственный раз после отрисовки
+    componentDidMount() {
+        instance.get("https://social-network.samuraijs.com/api/1.0/users")
+            .then(response => {
+                this.props.setUsers(response.data.items);
+            })
+    }
 
-    let getUsers = () => {
-        if(props.users.length === 0) {
-            instance.get("https://social-network.samuraijs.com/api/1.0/users")
-                .then(response => {
-                  props.setUsers(response.data.items);
-                })
-        }
+    render() {
+        return (
+            <div className={s.usersPage}>
+                <div>{
+                    this.props.users.map(el => <User id={el.id}
+                                                     followed={el.followed}
+                                                     ava={el.photos.small ? el.photos.small : ava}
+                                                     name={el.name}
+                                                     status={el.status ? el.status : ''}
+                                                     followUser={this.props.followUser}/>)
+                }</div>
+                {/*<button className={s.button_set} onClick={setUsers}>Show more</button>*/}
+            </div>
+
+        )
     }
 
 
-    let users = props.users.map(el => <User id={el.id}
-                                            followed={el.followed}
-                                            ava={el.photos.small ? el.photos.small : ava}
-                                            name={el.name}
-                                            status={el.status ? el.status : ''}
-                                            followUser={props.followUser}/>)
-
-
-    return (
-        <div className={s.usersPage}>
-            <button onClick={getUsers}>get users</button>
-            <div>{users}</div>
-            {/*<button className={s.button_set} onClick={setUsers}>Show more</button>*/}
-        </div>
-
-    )
 }
 
 export default UsersPage;
