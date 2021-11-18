@@ -17,4 +17,17 @@
   border: none;
 }
 
+.selectedPage {
+  font-weight: bold;
+}
+
+.pages {
+  display: flex;
+  flex-wrap: wrap;
+}
+.pages div {
+  margin: 5px;
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=UsersPage.module.css..map */

@@ -2,51 +2,45 @@ import React from "react";
 import s from './../../styles/UsersPage.module.css'
 import {UserType} from "../../types";
 import User from "./User/User";
-import axios from "axios";
 import ava from './../../images/ava.jpg'
 
 export type UsersPagePropsType = {
     users: Array<UserType>,
+    pageSize: number,
+    totalUserCount: number,
+    currentPage: number,
     followUser: (userId: number) => void,
-    setUsers: (newUsers: Array<UserType>) => void
+    onClickChangePage: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void,
 }
 
-const instance = axios.create({
-    withCredentials: true,
-    baseURL: 'https://social-network.samuraijs.com/api/1.0',
-    headers: {
-        "API-KEY": "438b43d8-c9fc-4009-a5e7-db75e710334c"
-    }
-})
+export const UsersPage = (props: UsersPagePropsType) => {
 
-//здесь д.б. типизация пропсов и типизация стэйта. Но какой здесь стэйт???
-class UsersPage extends React.Component<UsersPagePropsType, {}> {
-    //componentDidMount вызывается один единственный раз после отрисовки
-    componentDidMount() {
-        instance.get("https://social-network.samuraijs.com/api/1.0/users")
-            .then(response => {
-                this.props.setUsers(response.data.items);
-            })
-    }
+        let pages = [];
 
-    render() {
+        for (let i = 1; i <= Math.ceil(props.totalUserCount / props.pageSize); i++) {
+            pages.push(i);
+        }
+
+        let allPages = pages.map(el => <div onClick={props.onClickChangePage}
+            className={el === props.currentPage ? s.selectedPage : ''}>{el}</div>)
+
         return (
             <div className={s.usersPage}>
+
+                <div className={s.pages}>
+                    {allPages}
+                </div>
+
                 <div>{
-                    this.props.users.map(el => <User id={el.id}
+                    props.users.map(el => <User id={el.id}
                                                      followed={el.followed}
                                                      ava={el.photos.small ? el.photos.small : ava}
                                                      name={el.name}
                                                      status={el.status ? el.status : ''}
-                                                     followUser={this.props.followUser}/>)
+                                                     followUser={props.followUser}/>)
                 }</div>
-                {/*<button className={s.button_set} onClick={setUsers}>Show more</button>*/}
             </div>
-
         )
-    }
-
-
 }
 
 export default UsersPage;

@@ -16,3 +16,18 @@
   font-weight: bold;
   border: none;
 }
+
+.selectedPage {
+  font-weight: bold;
+}
+
+.pages {
+  display: flex;
+  flex-wrap: wrap;
+
+  div {
+    margin: 5px;
+    cursor: pointer;
+  }
+}
+
