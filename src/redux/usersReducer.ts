@@ -1,5 +1,4 @@
 import {AllActionType, UsersPageType, UserType} from "../types";
-import {v1} from "uuid";
 
 let initialState: UsersPageType = {
     users: [],
@@ -32,10 +31,10 @@ const usersReducer = (state: UsersPageType = initialState, action: AllActionType
     }
 }
 
-export const FollowUnfollowAC = (userId: number) => ({type: 'FOLLOW-UNFOLLOW', userId}as const);
-export const SetUsersAC = (newUsers: Array<UserType>) => ({type: 'SET-USERS', newUsers}as const);
-export const SetTotalUsersCountAC = (totalUsersCount: number) => ({type:'SET-TOTAL-USERS-COUNT', totalUsersCount}as const);
-export const SetCurrentPageAC = (currentPage: number) => ({type: 'SET-CURRENT-PAGE', currentPage}as const);
-export const SetFetchingAC = (isFetching: boolean) => ({type: 'SET-FETCHING', isFetching}as const);
+export const followUser = (userId: number) => ({type: 'FOLLOW-UNFOLLOW', userId}as const);
+export const setUsers = (newUsers: Array<UserType>) => ({type: 'SET-USERS', newUsers}as const);
+export const setTotalUsersCount = (totalUsersCount: number) => ({type:'SET-TOTAL-USERS-COUNT', totalUsersCount}as const);
+export const setCurrentPage = (currentPage: number) => ({type: 'SET-CURRENT-PAGE', currentPage}as const);
+export const setFetching = (isFetching: boolean) => ({type: 'SET-FETCHING', isFetching}as const);
 
 export default usersReducer;

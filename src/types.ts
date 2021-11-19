@@ -1,18 +1,12 @@
 import {onMessageTextChangeActionCreator, sendNewMessageActionCreator} from "./redux/dialogsReducer";
 import {addNewPostActionCreator, onPostChangeActionCreator} from "./redux/profileReducer";
 import {
-    FollowUnfollowAC,
-    SetCurrentPageAC,
-    SetFetchingAC,
-    SetTotalUsersCountAC,
-    SetUsersAC
+    followUser,
+    setCurrentPage,
+    setFetching,
+    setTotalUsersCount,
+    setUsers,
 } from "./redux/usersReducer";
-
-/*export type StateType = {
-    profilePage: ProfilePageType,
-    dialogsPage: DialogsPageType,
-    sidebar: SidebarType
-}*/
 
 export type ProfilePageType = {
     newPostText: string,
@@ -74,33 +68,16 @@ export type UserType = {
     }
     name: string,
     status: string,
-    // location: LocationType
 }
-
-
-/*export type LocationType = {
-    city: string,
-    country: string
-}*/
-
 
 export type AllActionType =
     | ReturnType<typeof onMessageTextChangeActionCreator>
     | ReturnType<typeof sendNewMessageActionCreator>
     | ReturnType<typeof addNewPostActionCreator>
     | ReturnType<typeof onPostChangeActionCreator>
-    | ReturnType<typeof FollowUnfollowAC>
-    | ReturnType<typeof SetUsersAC>
-    | ReturnType<typeof SetTotalUsersCountAC>
-    | ReturnType<typeof SetCurrentPageAC>
-    | ReturnType<typeof SetFetchingAC>
+    | ReturnType<typeof followUser>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setTotalUsersCount>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setFetching>
 
-/*
-export type StoreType = {
-    _state: StateType,
-    getState: () => StateType,
-    _callSubscriber: (state: StateType) => void,
-    dispatch: (action: AllActionType) => void,
-    subscribe: (observer: (state: StateType) => void) => void
-}
-*/
