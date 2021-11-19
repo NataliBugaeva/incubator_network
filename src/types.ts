@@ -1,6 +1,12 @@
 import {onMessageTextChangeActionCreator, sendNewMessageActionCreator} from "./redux/dialogsReducer";
 import {addNewPostActionCreator, onPostChangeActionCreator} from "./redux/profileReducer";
-import {FollowUnfollowAC, SetCurrentPageAC, SetTotalUsersCountAC, SetUsersAC} from "./redux/usersReducer";
+import {
+    FollowUnfollowAC,
+    SetCurrentPageAC,
+    SetFetchingAC,
+    SetTotalUsersCountAC,
+    SetUsersAC
+} from "./redux/usersReducer";
 
 /*export type StateType = {
     profilePage: ProfilePageType,
@@ -57,6 +63,7 @@ export type UsersPageType = {
     pageSize: number,
     totalUserCount: number,
     currentPage: number,
+    isFetching: boolean,
 }
 export type UserType = {
     id: number,
@@ -86,6 +93,7 @@ export type AllActionType =
     | ReturnType<typeof SetUsersAC>
     | ReturnType<typeof SetTotalUsersCountAC>
     | ReturnType<typeof SetCurrentPageAC>
+    | ReturnType<typeof SetFetchingAC>
 
 /*
 export type StoreType = {

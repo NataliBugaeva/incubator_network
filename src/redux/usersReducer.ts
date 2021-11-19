@@ -6,6 +6,7 @@ let initialState: UsersPageType = {
     pageSize: 75,
     totalUserCount: 0,
     currentPage: 1,
+    isFetching: true,
 }
 
 const usersReducer = (state: UsersPageType = initialState, action: AllActionType): UsersPageType => {
@@ -23,6 +24,9 @@ const usersReducer = (state: UsersPageType = initialState, action: AllActionType
         case 'SET-CURRENT-PAGE': {
             return {...state, currentPage: action.currentPage}
         }
+        case 'SET-FETCHING': {
+            return {...state, isFetching: action.isFetching}
+        }
         default:
             return state;
     }
@@ -32,5 +36,6 @@ export const FollowUnfollowAC = (userId: number) => ({type: 'FOLLOW-UNFOLLOW', u
 export const SetUsersAC = (newUsers: Array<UserType>) => ({type: 'SET-USERS', newUsers}as const);
 export const SetTotalUsersCountAC = (totalUsersCount: number) => ({type:'SET-TOTAL-USERS-COUNT', totalUsersCount}as const);
 export const SetCurrentPageAC = (currentPage: number) => ({type: 'SET-CURRENT-PAGE', currentPage}as const);
+export const SetFetchingAC = (isFetching: boolean) => ({type: 'SET-FETCHING', isFetching}as const);
 
 export default usersReducer;
