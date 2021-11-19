@@ -17,7 +17,7 @@ function App() {
             <Header/>
             <div className='mainPart'>
                 <SidebarContainer />
-                <Route render={() => <ProfilePageContainer/>} path='/profile'/>
+                <Route render={() => <ProfilePageContainer/>} path='/profile/:userId?'/>
                 <Route render={() => <DialogsPageContainer/>} path='/dialogs'/>
                 <Route render={() => <NewsPage/>} path='/news'/>
                 <Route render={() => <MusicPage/>} path='/music'/>

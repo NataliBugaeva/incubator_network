@@ -2,6 +2,7 @@ import React from "react";
 import s from './../../../styles/AboutMe.module.css';
 import myAva from './../../../images/ava.jpg';
 import Avatar, {AvatarStylesType} from "../../Avatar/Avatar";
+import {debuglog} from "util";
 //import {AboutMeType} from "../../../types";
 
 export type AboutPropsType = {
@@ -9,11 +10,11 @@ export type AboutPropsType = {
     aboutMe: string,
     insta: string,
     status: string,
+    avatar: string
 }
 
 
 function About(props: AboutPropsType) {
-
     const styles: AvatarStylesType = {
 
         styles: {
@@ -21,7 +22,7 @@ function About(props: AboutPropsType) {
             height: '100px',
             minWidth: '100px'
         },
-        avatar: myAva
+        avatar: props.avatar
     }
 
     return (

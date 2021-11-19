@@ -53,7 +53,6 @@ class UsersPageContainer extends React.Component<UsersPageContainerPropsType, {}
 
         instance.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${currentPage}`)
             .then(response => {
-                console.log(response.data.items);
                 this.props.setUsers(response.data.items);
                 this.props.setCurrentPage(currentPage);
                 this.props.setFetching(false);

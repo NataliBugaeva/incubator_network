@@ -18,8 +18,11 @@ function ProfilePage(props: ProfilePagePropsType) {
             <div className={s.profilePage_img}>
                 <img src={city} alt="city"/>
             </div>
-            <About name={props.profilePage.profile.fullName} aboutMe={props.profilePage.profile.aboutMe}
-                     insta={props.profilePage.profile.contacts.instagram} status={props.profilePage.profile.lookingForAJobDescription}/>
+            <About name={props.profilePage.profile.fullName}
+                   aboutMe={props.profilePage.profile.aboutMe}
+                   insta={props.profilePage.profile.contacts.instagram}
+                   status={props.profilePage.profile.lookingForAJobDescription}
+                   avatar={props.profilePage.profile.photos.small}/>
             <MyPosts myPosts={props.profilePage.myPosts}
                      newPostText={props.profilePage.newPostText}
                      onPostChange={props.onPostChange}
