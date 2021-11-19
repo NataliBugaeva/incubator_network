@@ -1,5 +1,5 @@
 import {onMessageTextChangeActionCreator, sendNewMessageActionCreator} from "./redux/dialogsReducer";
-import {addNewPostActionCreator, onPostChangeActionCreator} from "./redux/profileReducer";
+import {addNewPost, changeProfile, onPostChange} from "./redux/profileReducer";
 import {
     followUser,
     setCurrentPage,
@@ -7,18 +7,54 @@ import {
     setTotalUsersCount,
     setUsers,
 } from "./redux/usersReducer";
+import axios from "axios";
+
+
+export const instance = axios.create({
+    withCredentials: true,
+    baseURL: 'https://social-network.samuraijs.com/api/1.0',
+    headers: {
+        "API-KEY": "438b43d8-c9fc-4009-a5e7-db75e710334c"
+    }
+})
 
 export type ProfilePageType = {
+    profile: ProfileType,
     newPostText: string,
-    aboutMe: AboutMeType,
-    myPosts: Array<PostType>
+    //aboutMe: AboutMeType,
+    myPosts: Array<PostType>,
 }
-export type AboutMeType = {
-    name: string,
-    birthDate: string,
-    city: string,
-    education: string
+
+export type ProfileContactsType = {
+    facebook: string,
+    website: null,
+    vk: string,
+    twitter: string,
+    instagram: string,
+    youtube: null,
+    github: string,
+    mainLink: null
 }
+export type ProfilePhotosType = {
+    small: string,
+    large: string
+}
+export type ProfileType = {
+    aboutMe: string,
+    contacts: ProfileContactsType,
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    fullName: string,
+    userId: number,
+    photos: ProfilePhotosType
+}
+
+// export type AboutMeType = {
+//     name: string,
+//     birthDate: string,
+//     city: string,
+//     education: string
+// }
 export type PostType = {
     id: string,
     name: string,
@@ -73,8 +109,9 @@ export type UserType = {
 export type AllActionType =
     | ReturnType<typeof onMessageTextChangeActionCreator>
     | ReturnType<typeof sendNewMessageActionCreator>
-    | ReturnType<typeof addNewPostActionCreator>
-    | ReturnType<typeof onPostChangeActionCreator>
+    | ReturnType<typeof addNewPost>
+    | ReturnType<typeof onPostChange>
+    | ReturnType<typeof changeProfile>
     | ReturnType<typeof followUser>
     | ReturnType<typeof setUsers>
     | ReturnType<typeof setTotalUsersCount>

@@ -1,25 +1,37 @@
 import React from "react";
-import {AllActionType} from "../../types";
+import {instance, ProfilePageType, ProfileType} from "../../types";
 import ProfilePage from "./ProfilePage";
-import {addNewPostActionCreator, onPostChangeActionCreator} from "../../redux/profileReducer";
+import {addNewPost, changeProfile, onPostChange} from "../../redux/profileReducer";
 import {connect} from "react-redux";
 import {RootState} from "../../redux/store";
+
+export type ProfilePageContainerPropsType = {
+    profilePage: ProfilePageType,
+    onPostChange: (value: string) => void,
+    addNewPost: () => void,
+    changeProfile: (profile: ProfileType) => void,
+}
+
+class ProfilePageContainer extends React.Component<ProfilePageContainerPropsType, {}> {
+    componentDidMount() {
+        instance.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+            .then(response => {
+                this.props.changeProfile(response.data);
+            })
+    }
+
+    render() {
+        return (
+            <ProfilePage profilePage={this.props.profilePage}
+                         onPostChange={this.props.onPostChange}
+                         addNewPost={this.props.addNewPost}/>
+        )
+    }
+}
 
 let MapStateToProps = (state: RootState) => ({
     profilePage: state.profilePage
 })
 
-let MapDispatchToProps = (dispatch: (action: AllActionType) => void) => ({
-    onPostChange: (value: string) => {
-        dispatch(onPostChangeActionCreator(value))
-    },
-    onAddNewPost: () => {
-        dispatch(addNewPostActionCreator())
-    }
-})
-
-
-
-const ProfilePageContainer = connect(MapStateToProps, MapDispatchToProps)(ProfilePage);
-
-export default ProfilePageContainer;
+export default connect(MapStateToProps, {onPostChange,
+    addNewPost, changeProfile})(ProfilePageContainer);

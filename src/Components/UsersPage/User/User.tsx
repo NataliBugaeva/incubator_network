@@ -1,6 +1,7 @@
 import React from "react";
 import s from './../../../styles/User.module.css'
 import Avatar, {AvatarStylesType} from "../../Avatar/Avatar";
+import {NavLink} from "react-router-dom";
 
 export type UserPropsType = {
     id: number,
@@ -32,7 +33,9 @@ const User = (props: UserPropsType) => {
     return (
         <div className={s.user_block}>
             <div className={s.user_block_with_ava}>
-                <Avatar styles={styles.styles} avatar={styles.avatar}/>
+                <NavLink to={`/profile/${props.id}`}>
+                    <Avatar styles={styles.styles} avatar={styles.avatar}/>
+                </NavLink>
                 {button}
             </div>
 

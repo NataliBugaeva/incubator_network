@@ -4,24 +4,26 @@ import city from './../../images/city2.jpg';
 import AboutMe from "./AboutMe/AboutMe";
 import MyPosts from "./MyPosts/MyPosts";
 import {ProfilePageType} from "../../types";
+import About from "./AboutMe/AboutMe";
 
-
-function ProfilePage(props: {
+export type ProfilePagePropsType = {
     profilePage: ProfilePageType,
     onPostChange: (value: string) => void,
-    onAddNewPost: () => void
-}) {
+    addNewPost: () => void
+}
+
+function ProfilePage(props: ProfilePagePropsType) {
     return (
         <div className={s.profilePage}>
             <div className={s.profilePage_img}>
                 <img src={city} alt="city"/>
             </div>
-            <AboutMe name={props.profilePage.aboutMe.name} birthDate={props.profilePage.aboutMe.birthDate}
-                     city={props.profilePage.aboutMe.city} education={props.profilePage.aboutMe.education}/>
+            <About name={props.profilePage.profile.fullName} aboutMe={props.profilePage.profile.aboutMe}
+                     insta={props.profilePage.profile.contacts.instagram} status={props.profilePage.profile.lookingForAJobDescription}/>
             <MyPosts myPosts={props.profilePage.myPosts}
                      newPostText={props.profilePage.newPostText}
                      onPostChange={props.onPostChange}
-                     onAddNewPost={props.onAddNewPost}/>
+                     onAddNewPost={props.addNewPost}/>
         </div>
     )
 }
