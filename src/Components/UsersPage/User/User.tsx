@@ -2,6 +2,7 @@ import React from "react";
 import s from './../../../styles/User.module.css'
 import Avatar, {AvatarStylesType} from "../../Avatar/Avatar";
 import {NavLink} from "react-router-dom";
+import {instance} from "../../../types";
 
 export type UserPropsType = {
     id: number,
@@ -24,11 +25,25 @@ const User = (props: UserPropsType) => {
     }
 
     let followUser = () => {
-        props.followUser(props.id);
+        instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`)
+            .then(response => {
+                if(response.data.resultCode == 0) {
+                    props.followUser(props.id);
+                }
+            })
     }
 
-    let button =  props.followed ? <button onClick={followUser}>Unfolloved</button>
-        : <button onClick={followUser}>Folloved</button>
+    let unfollowUser = () => {
+        instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`)
+            .then(response => {
+                if(response.data.resultCode == 0) {
+                    props.followUser(props.id);
+                }
+            })
+    }
+
+    let button =  props.followed ? <button onClick={unfollowUser}>Unfollow</button>
+        : <button onClick={followUser}>Follow</button>
 
     return (
         <div className={s.user_block}>
