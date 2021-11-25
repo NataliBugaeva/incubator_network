@@ -1,7 +1,6 @@
 import React from "react";
 import s from './../../styles/ProfilePage.module.css';
 import city from './../../images/city2.jpg';
-import AboutMe from "./AboutMe/AboutMe";
 import MyPosts from "./MyPosts/MyPosts";
 import {ProfilePageType} from "../../types";
 import About from "./AboutMe/AboutMe";

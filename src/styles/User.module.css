@@ -36,5 +36,8 @@ button {
   font-weight: bold;
   border: none;
 }
+button:hover {
+  cursor: pointer;
+}
 
 /*# sourceMappingURL=User.module.css..map */

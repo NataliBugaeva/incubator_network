@@ -15,32 +15,33 @@ export type UsersPagePropsType = {
 
 export const UsersPage = (props: UsersPagePropsType) => {
 
-        let pages = [];
+    let pages = [];
 
-        for (let i = 1; i <= Math.ceil(props.totalUserCount / props.pageSize); i++) {
-            pages.push(i);
-        }
+    for (let i = 1; i <= Math.ceil(props.totalUserCount / props.pageSize); i++) {
+        pages.push(i);
+    }
 
-        let allPages = pages.map(el => <div onClick={props.onClickChangePage}
-            className={el === props.currentPage ? s.selectedPage : ''}>{el}</div>)
+    let allPages = pages.map(el => <div onClick={props.onClickChangePage}
+                                        className={el === props.currentPage ? s.selectedPage : ''}>{el}</div>)
 
-        return (
-            <div className={s.usersPage}>
+    return (
+        <div className={s.usersPage}>
 
-                <div className={s.pages}>
-                    {allPages}
-                </div>
-
-                <div>{
-                    props.users.map(el => <User id={el.id}
-                                                     followed={el.followed}
-                                                     ava={el.photos.small ? el.photos.small : ava}
-                                                     name={el.name}
-                                                     status={el.status ? el.status : ''}
-                                                     followUser={props.followUser}/>)
-                }</div>
+            <div className={s.pages}>
+                {allPages}
             </div>
-        )
+
+            <div>{
+                props.users.map(el => <User key={el.id}
+                                            id={el.id}
+                                            followed={el.followed}
+                                            ava={el.photos.small ? el.photos.small : ava}
+                                            name={el.name}
+                                            status={el.status ? el.status : ''}
+                                            followUser={props.followUser}/>)
+            }</div>
+        </div>
+    )
 }
 
 export default UsersPage;

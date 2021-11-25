@@ -1,4 +1,3 @@
-import React from "react";
 import {AllActionType} from "../../types";
 import {onMessageTextChangeActionCreator, sendNewMessageActionCreator} from "../../redux/dialogsReducer";
 import DialogsPage from "./DialogsPage";

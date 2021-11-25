@@ -1,10 +1,11 @@
 import React from "react";
-import {instance, ProfilePageType, ProfileType} from "../../types";
+import {ProfilePageType, ProfileType} from "../../types";
 import ProfilePage from "./ProfilePage";
 import {addNewPost, changeProfile, onPostChange} from "../../redux/profileReducer";
 import {connect} from "react-redux";
 import {RootState} from "../../redux/store";
 import {RouteComponentProps, withRouter } from "react-router-dom";
+import {userAPI} from "../../api/api";
 
 export type ProfilePageContainerPropsType = {
     profilePage: ProfilePageType,
@@ -19,12 +20,13 @@ export type ProfilePageContainerWithRouterPropsType = RouteComponentProps<{userI
 
 class ProfilePageContainer extends React.Component<ProfilePageContainerWithRouterPropsType, {}> {
     componentDidMount() {
-        let userId = this.props.match.params.userId || 2;
+        let userId = Number(this.props.match.params.userId) || 2;
 
 
-        instance.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-            .then(response => {
-                this.props.changeProfile(response.data);
+        //instance.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
+        userAPI.getCertainUser(userId)
+            .then(data => {
+                this.props.changeProfile(data);
             })
     }
 

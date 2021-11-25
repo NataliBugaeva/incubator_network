@@ -7,17 +7,9 @@ import {
     setTotalUsersCount,
     setUsers,
 } from "./redux/usersReducer";
-import axios from "axios";
 import {setUserData} from "./redux/authReducer";
 
 
-export const instance = axios.create({
-    withCredentials: true,
-    baseURL: 'https://social-network.samuraijs.com/api/1.0',
-    headers: {
-        "API-KEY": "438b43d8-c9fc-4009-a5e7-db75e710334c"
-    }
-})
 
 export type ProfilePageType = {
     profile: ProfileType,

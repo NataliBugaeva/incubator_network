@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Header from "./Components/Header/Header";
 import {Route} from "react-router-dom";
 import NewsPage from "./Components/NewsPage/NewsPage";
 import MusicPage from "./Components/MusicPage/MusicPage";

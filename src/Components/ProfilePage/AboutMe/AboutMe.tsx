@@ -1,9 +1,6 @@
 import React from "react";
 import s from './../../../styles/AboutMe.module.css';
-import myAva from './../../../images/ava.jpg';
 import Avatar, {AvatarStylesType} from "../../Avatar/Avatar";
-import {debuglog} from "util";
-//import {AboutMeType} from "../../../types";
 
 export type AboutPropsType = {
     name: string,

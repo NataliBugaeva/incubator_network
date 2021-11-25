@@ -2,7 +2,7 @@ import React from "react";
 import s from './../../../styles/User.module.css'
 import Avatar, {AvatarStylesType} from "../../Avatar/Avatar";
 import {NavLink} from "react-router-dom";
-import {instance} from "../../../types";
+import {userAPI} from "../../../api/api";
 
 export type UserPropsType = {
     id: number,
@@ -25,18 +25,20 @@ const User = (props: UserPropsType) => {
     }
 
     let followUser = () => {
-        instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`)
-            .then(response => {
-                if(response.data.resultCode == 0) {
+        //instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`)
+        userAPI.followUser(props.id)
+            .then(data => {
+                if(data.resultCode === 0) {
                     props.followUser(props.id);
                 }
             })
     }
 
     let unfollowUser = () => {
-        instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`)
-            .then(response => {
-                if(response.data.resultCode == 0) {
+        //instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`)
+        userAPI.unfollowUser(props.id)
+            .then(data => {
+                if(data.resultCode === 0) {
                     props.followUser(props.id);
                 }
             })

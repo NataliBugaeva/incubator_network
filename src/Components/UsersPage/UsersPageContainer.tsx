@@ -2,7 +2,7 @@ import React from "react";
 import UsersPage from "./UsersPage";
 import {connect} from "react-redux";
 import {RootState} from "../../redux/store";
-import {AllActionType, instance, UserType} from "../../types";
+import {UserType} from "../../types";
 import {
     followUser,
     setCurrentPage,
@@ -10,16 +10,8 @@ import {
     setTotalUsersCount,
     setUsers
 } from "../../redux/usersReducer";
-import axios from "axios";
 import Preloader from "../Preloader/preloader";
-
-/*const instance = axios.create({
-    withCredentials: true,
-    baseURL: 'https://social-network.samuraijs.com/api/1.0',
-    headers: {
-        "API-KEY": "438b43d8-c9fc-4009-a5e7-db75e710334c"
-    }
-})*/
+import {userAPI} from "../../api/api";
 
 export type UsersPageContainerPropsType = {
     users: Array<UserType>,
@@ -39,10 +31,11 @@ class UsersPageContainer extends React.Component<UsersPageContainerPropsType, {}
     //componentDidMount вызывается один единственный раз после отрисовки
     componentDidMount() {
         this.props.setFetching(true);
-        instance.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`)
-            .then(response => {
-                this.props.setUsers(response.data.items);
-                this.props.setTotalUsersCount(response.data.totalCount);
+        // instance.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`)
+        userAPI.getUsers(this.props.pageSize, this.props.currentPage)
+            .then(data => {
+                this.props.setUsers(data.items);
+                this.props.setTotalUsersCount(data.totalCount);
                 this.props.setFetching(false);
             })
     }
@@ -51,9 +44,10 @@ class UsersPageContainer extends React.Component<UsersPageContainerPropsType, {}
         let currentPage = +e.currentTarget.innerHTML;
         this.props.setFetching(true);
 
-        instance.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${currentPage}`)
-            .then(response => {
-                this.props.setUsers(response.data.items);
+        //instance.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${currentPage}`)
+        userAPI.getUsers(this.props.pageSize, currentPage)
+            .then(data => {
+                this.props.setUsers(data.items);
                 this.props.setCurrentPage(currentPage);
                 this.props.setFetching(false);
             })
@@ -63,11 +57,11 @@ class UsersPageContainer extends React.Component<UsersPageContainerPropsType, {}
         return (
             <>
                 {this.props.isFetching ? <Preloader/> : <UsersPage users={this.props.users}
-                                                                 pageSize={this.props.pageSize}
-                                                                 totalUserCount={this.props.totalUserCount}
-                                                                 currentPage={this.props.currentPage}
-                                                                 followUser={this.props.followUser}
-                                                                 onClickChangePage={this.onClickChangePage.bind(this)}/>}
+                                                                   pageSize={this.props.pageSize}
+                                                                   totalUserCount={this.props.totalUserCount}
+                                                                   currentPage={this.props.currentPage}
+                                                                   followUser={this.props.followUser}
+                                                                   onClickChangePage={this.onClickChangePage.bind(this)}/>}
             </>
         )
     }
@@ -106,5 +100,7 @@ let MapStateToProps = (state: RootState) => ({
     }
 })*/
 
-export default connect(MapStateToProps, {followUser, setUsers, setTotalUsersCount,
-    setCurrentPage, setFetching})(UsersPageContainer)
+export default connect(MapStateToProps, {
+    followUser, setUsers, setTotalUsersCount,
+    setCurrentPage, setFetching
+})(UsersPageContainer)

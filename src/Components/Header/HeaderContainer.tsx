@@ -3,7 +3,8 @@ import Header from "./Header";
 import {connect} from "react-redux";
 import {setUserData} from "../../redux/authReducer";
 import {RootState} from "../../redux/store";
-import {instance, UserAuthDataType} from "../../types";
+import {UserAuthDataType} from "../../types";
+import {userAPI} from "../../api/api";
 
 export type HeaderContainerPropsType = {
     id: number,
@@ -13,10 +14,11 @@ export type HeaderContainerPropsType = {
 
 class HeaderContainer extends React.Component<HeaderContainerPropsType, {}> {
     componentDidMount() {
-        instance.get('https://social-network.samuraijs.com/api/1.0/auth/me')
-            .then(response => {
-                if(response.data.resultCode == 0) {
-                    this.props.setUserData(response.data.data);
+       // instance.get('https://social-network.samuraijs.com/api/1.0/auth/me')
+        userAPI.authMe()
+            .then(data => {
+                if(data.resultCode === 0) {
+                    this.props.setUserData(data.data);
                 }
             })
     }

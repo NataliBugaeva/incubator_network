@@ -40,5 +40,9 @@ button {
   color: white;
   font-weight: bold;
   border: none;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
