@@ -10,11 +10,12 @@ import ProfilePageContainer from "./Components/ProfilePage/ProfilePageContainer"
 import DialogsPageContainer from "./Components/DialogsPage/DialogsPageContainer";
 import SidebarContainer from "./Components/Sidebar/SidebarContainer";
 import UsersPageContainer from './Components/UsersPage/UsersPageContainer';
+import HeaderContainer from "./Components/Header/HeaderContainer";
 
 function App() {
     return (
         <div className="app">
-            <Header/>
+            <HeaderContainer />
             <div className='mainPart'>
                 <SidebarContainer />
                 <Route render={() => <ProfilePageContainer/>} path='/profile/:userId?'/>

@@ -8,6 +8,7 @@ import {
     setUsers,
 } from "./redux/usersReducer";
 import axios from "axios";
+import {setUserData} from "./redux/authReducer";
 
 
 export const instance = axios.create({
@@ -106,6 +107,12 @@ export type UserType = {
     status: string,
 }
 
+export type UserAuthDataType = {
+    id: number,
+    email: string,
+    login: string
+}
+
 export type AllActionType =
     | ReturnType<typeof onMessageTextChangeActionCreator>
     | ReturnType<typeof sendNewMessageActionCreator>
@@ -117,4 +124,5 @@ export type AllActionType =
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setFetching>
+    | ReturnType<typeof setUserData>
 
