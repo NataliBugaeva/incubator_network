@@ -41,6 +41,10 @@ button {
   font-weight: bold;
   border: none;
 
+  &[disabled] {
+    opacity: .2;
+  }
+
   &:hover {
     cursor: pointer;
   }

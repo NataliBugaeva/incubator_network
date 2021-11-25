@@ -36,6 +36,9 @@ button {
   font-weight: bold;
   border: none;
 }
+button[disabled] {
+  opacity: 0.2;
+}
 button:hover {
   cursor: pointer;
 }

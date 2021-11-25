@@ -11,6 +11,8 @@ export type UsersPagePropsType = {
     currentPage: number,
     followUser: (userId: number) => void,
     onClickChangePage: (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void,
+    followingInProgress: Array<number>,
+    setFollowingInProgress: (inProgress: boolean, userId: number) => void
 }
 
 export const UsersPage = (props: UsersPagePropsType) => {
@@ -38,7 +40,9 @@ export const UsersPage = (props: UsersPagePropsType) => {
                                             ava={el.photos.small ? el.photos.small : ava}
                                             name={el.name}
                                             status={el.status ? el.status : ''}
-                                            followUser={props.followUser}/>)
+                                            followUser={props.followUser}
+                                            followingInProgress={props.followingInProgress}
+                                            setFollowingInProgress={props.setFollowingInProgress}/>)
             }</div>
         </div>
     )

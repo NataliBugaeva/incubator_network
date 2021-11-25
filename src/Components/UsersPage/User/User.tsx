@@ -10,10 +10,13 @@ export type UserPropsType = {
     ava: string,
     name: string,
     status: string,
-    followUser: (userId: number) => void
+    followUser: (userId: number) => void,
+    followingInProgress: Array<number>,
+    setFollowingInProgress: (inProgress: boolean, userId: number) => void,
 }
 
 const User = (props: UserPropsType) => {
+
     const styles: AvatarStylesType = {
 
         styles: {
@@ -25,27 +28,33 @@ const User = (props: UserPropsType) => {
     }
 
     let followUser = () => {
+        props.setFollowingInProgress(true, props.id);
         //instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`)
         userAPI.followUser(props.id)
             .then(data => {
                 if(data.resultCode === 0) {
                     props.followUser(props.id);
                 }
+                props.setFollowingInProgress(false, props.id);
             })
     }
 
     let unfollowUser = () => {
+       props.setFollowingInProgress(true, props.id);
         //instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`)
         userAPI.unfollowUser(props.id)
             .then(data => {
                 if(data.resultCode === 0) {
                     props.followUser(props.id);
                 }
+             props.setFollowingInProgress(false, props.id);
             })
     }
 
-    let button =  props.followed ? <button onClick={unfollowUser}>Unfollow</button>
-        : <button onClick={followUser}>Follow</button>
+    let button =  props.followed ? <button disabled={props.followingInProgress.some(id => id === props.id)}
+                                           onClick={unfollowUser}>Unfollow</button>
+        : <button disabled={props.followingInProgress.some(id => id === props.id)}
+                  onClick={followUser}>Follow</button>
 
     return (
         <div className={s.user_block}>

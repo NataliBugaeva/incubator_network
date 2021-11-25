@@ -3,12 +3,11 @@ import {addNewPost, changeProfile, onPostChange} from "./redux/profileReducer";
 import {
     followUser,
     setCurrentPage,
-    setFetching,
+    setFetching, setFollowingInProgress,
     setTotalUsersCount,
     setUsers,
 } from "./redux/usersReducer";
 import {setUserData} from "./redux/authReducer";
-
 
 
 export type ProfilePageType = {
@@ -87,6 +86,7 @@ export type UsersPageType = {
     totalUserCount: number,
     currentPage: number,
     isFetching: boolean,
+    followingInProgress: Array<number>
 }
 export type UserType = {
     id: number,
@@ -117,4 +117,5 @@ export type AllActionType =
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setFetching>
     | ReturnType<typeof setUserData>
+    | ReturnType<typeof setFollowingInProgress>
 

@@ -6,7 +6,7 @@ import {UserType} from "../../types";
 import {
     followUser,
     setCurrentPage,
-    setFetching,
+    setFetching, setFollowingInProgress,
     setTotalUsersCount,
     setUsers
 } from "../../redux/usersReducer";
@@ -23,7 +23,9 @@ export type UsersPageContainerPropsType = {
     setUsers: (newUsers: Array<UserType>) => void,
     setTotalUsersCount: (totalUsersCount: number) => void,
     setCurrentPage: (currentPage: number) => void,
-    setFetching: (isFetching: boolean) => void
+    setFetching: (isFetching: boolean) => void,
+    followingInProgress: Array<number>,
+    setFollowingInProgress: (inProgress: boolean, userId: number) => void
 }
 
 //здесь д.б. типизация пропсов и типизация стэйта. Но какой здесь стэйт???
@@ -61,7 +63,9 @@ class UsersPageContainer extends React.Component<UsersPageContainerPropsType, {}
                                                                    totalUserCount={this.props.totalUserCount}
                                                                    currentPage={this.props.currentPage}
                                                                    followUser={this.props.followUser}
-                                                                   onClickChangePage={this.onClickChangePage.bind(this)}/>}
+                                                                   onClickChangePage={this.onClickChangePage.bind(this)}
+                                                                   followingInProgress={this.props.followingInProgress}
+                                                                   setFollowingInProgress={this.props.setFollowingInProgress}/>}
             </>
         )
     }
@@ -75,7 +79,7 @@ let MapStateToProps = (state: RootState) => ({
     totalUserCount: state.usersPage.totalUserCount,
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
-
+    followingInProgress: state.usersPage.followingInProgress,
 })
 
 /*let MapDispatchToProps = (dispatch: (action: AllActionType) => void) => ({
@@ -102,5 +106,5 @@ let MapStateToProps = (state: RootState) => ({
 
 export default connect(MapStateToProps, {
     followUser, setUsers, setTotalUsersCount,
-    setCurrentPage, setFetching
+    setCurrentPage, setFetching, setFollowingInProgress
 })(UsersPageContainer)
