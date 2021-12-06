@@ -1,4 +1,7 @@
 import {AllActionType, UserAuthDataType} from "../types";
+import {ThunkAction} from "redux-thunk";
+import {RootState} from "./store";
+import {authAPI} from "../api/api";
 
 let initialState = {} as UserAuthDataType;
 
@@ -12,3 +15,15 @@ export const authReducer = (state: UserAuthDataType = initialState, action: AllA
 }
 
 export const setUserData = (data: UserAuthDataType) => ({type: 'SET-USER-DATA', data}as const);
+
+//это authMeThunkCreator
+export const authMe = (): ThunkAction<Promise<void>, RootState, unknown, AllActionType> => {
+    return async (dispatch) => {
+        authAPI.authMe()
+            .then(data => {
+                if(data.resultCode === 0) {
+                    dispatch(setUserData(data.data));
+                }
+            })
+    }
+}

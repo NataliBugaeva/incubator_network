@@ -10,7 +10,8 @@ export type UserPropsType = {
     ava: string,
     name: string,
     status: string,
-    followUser: (userId: number) => void,
+    followUserTC: (id: number) => void,
+    unfollowUserTC: (id: number) => void,
     followingInProgress: Array<number>,
     setFollowingInProgress: (inProgress: boolean, userId: number) => void,
 }
@@ -30,25 +31,28 @@ const User = (props: UserPropsType) => {
     let followUser = () => {
         props.setFollowingInProgress(true, props.id);
         //instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`)
-        userAPI.followUser(props.id)
-            .then(data => {
-                if(data.resultCode === 0) {
-                    props.followUser(props.id);
-                }
-                props.setFollowingInProgress(false, props.id);
-            })
+
+       props.followUserTC(props.id);
+        // userAPI.followUser(props.id)
+        //     .then(data => {
+        //         if(data.resultCode === 0) {
+        //             props.followUser(props.id);
+        //         }
+        //         props.setFollowingInProgress(false, props.id);
+        //     })
     }
 
     let unfollowUser = () => {
        props.setFollowingInProgress(true, props.id);
         //instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`)
-        userAPI.unfollowUser(props.id)
-            .then(data => {
-                if(data.resultCode === 0) {
-                    props.followUser(props.id);
-                }
-             props.setFollowingInProgress(false, props.id);
-            })
+        props.unfollowUserTC(props.id);
+        // userAPI.unfollowUser(props.id)
+        //     .then(data => {
+        //         if(data.resultCode === 0) {
+        //             props.followUser(props.id);
+        //         }
+        //      props.setFollowingInProgress(false, props.id);
+        //     })
     }
 
     let button =  props.followed ? <button disabled={props.followingInProgress.some(id => id === props.id)}

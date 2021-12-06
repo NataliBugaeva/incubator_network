@@ -1,17 +1,15 @@
-import React from "react";
+import React, {Dispatch} from "react";
 import UsersPage from "./UsersPage";
 import {connect} from "react-redux";
 import {RootState} from "../../redux/store";
 import {UserType} from "../../types";
 import {
-    followUser,
+    followUser, followUserTC,
+    getUsers,
     setCurrentPage,
-    setFetching, setFollowingInProgress,
-    setTotalUsersCount,
-    setUsers
+    setFollowingInProgress, unfollowUserTC,
 } from "../../redux/usersReducer";
 import Preloader from "../Preloader/preloader";
-import {userAPI} from "../../api/api";
 
 export type UsersPageContainerPropsType = {
     users: Array<UserType>,
@@ -19,40 +17,53 @@ export type UsersPageContainerPropsType = {
     totalUserCount: number,
     currentPage: number,
     isFetching: boolean,
-    followUser: (userId: number) => void,
-    setUsers: (newUsers: Array<UserType>) => void,
-    setTotalUsersCount: (totalUsersCount: number) => void,
-    setCurrentPage: (currentPage: number) => void,
-    setFetching: (isFetching: boolean) => void,
     followingInProgress: Array<number>,
-    setFollowingInProgress: (inProgress: boolean, userId: number) => void
+    followUser: (userId: number) => void,
+    followUserTC: (id: number) => void,
+    unfollowUserTC: (id: number) => void,
+   // setUsers: (newUsers: Array<UserType>) => void,
+   // setTotalUsersCount: (totalUsersCount: number) => void,
+    setCurrentPage: (currentPage: number) => void,
+   // setFetching: (isFetching: boolean) => void,
+
+    setFollowingInProgress: (inProgress: boolean, userId: number) => void,
+    getUsers:  (pageSize: number, currentPage: number) => void
+    //getUsers: getUsersThunkCreator
 }
 
 //здесь д.б. типизация пропсов и типизация стэйта. Но какой здесь стэйт???
 class UsersPageContainer extends React.Component<UsersPageContainerPropsType, {}> {
     //componentDidMount вызывается один единственный раз после отрисовки
     componentDidMount() {
-        this.props.setFetching(true);
-        // instance.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`)
-        userAPI.getUsers(this.props.pageSize, this.props.currentPage)
-            .then(data => {
-                this.props.setUsers(data.items);
-                this.props.setTotalUsersCount(data.totalCount);
-                this.props.setFetching(false);
-            })
+        //это санка
+        this.props.getUsers(this.props.pageSize, this.props.currentPage);
+
+        // this.props.setFetching(true);
+        // // instance.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`)
+        // userAPI.getUsers(this.props.pageSize, this.props.currentPage)
+        //     .then(data => {
+        //         this.props.setUsers(data.items);
+        //         this.props.setTotalUsersCount(data.totalCount);
+        //         this.props.setFetching(false);
+        //     })
     }
 
     onClickChangePage(e: React.MouseEvent<HTMLSpanElement, MouseEvent>) {
         let currentPage = +e.currentTarget.innerHTML;
-        this.props.setFetching(true);
+        this.props.setCurrentPage(currentPage);
+        //это санка
+        this.props.getUsers(this.props.pageSize, currentPage);
 
-        //instance.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${currentPage}`)
-        userAPI.getUsers(this.props.pageSize, currentPage)
-            .then(data => {
-                this.props.setUsers(data.items);
-                this.props.setCurrentPage(currentPage);
-                this.props.setFetching(false);
-            })
+        // let currentPage = +e.currentTarget.innerHTML;
+        // this.props.setFetching(true);
+        // this.props.setCurrentPage(currentPage);
+        //
+        // //instance.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${currentPage}`)
+        // userAPI.getUsers(this.props.pageSize, currentPage)
+        //     .then(data => {
+        //         this.props.setUsers(data.items);
+        //         this.props.setFetching(false);
+        //     })
     }
 
     render() {
@@ -62,9 +73,10 @@ class UsersPageContainer extends React.Component<UsersPageContainerPropsType, {}
                                                                    pageSize={this.props.pageSize}
                                                                    totalUserCount={this.props.totalUserCount}
                                                                    currentPage={this.props.currentPage}
-                                                                   followUser={this.props.followUser}
                                                                    onClickChangePage={this.onClickChangePage.bind(this)}
                                                                    followingInProgress={this.props.followingInProgress}
+                                                                   followUserTC={this.props.followUserTC}
+                                                                   unfollowUserTC={this.props.unfollowUserTC}
                                                                    setFollowingInProgress={this.props.setFollowingInProgress}/>}
             </>
         )
@@ -82,29 +94,8 @@ let MapStateToProps = (state: RootState) => ({
     followingInProgress: state.usersPage.followingInProgress,
 })
 
-/*let MapDispatchToProps = (dispatch: (action: AllActionType) => void) => ({
-    followUser: (userId: number) => {
-        dispatch(FollowUser(userId))
-    },
-
-    setUsers: (newUsers: Array<UserType>) => {
-        dispatch(SetUsers(newUsers))
-    },
-
-    setTotalUsersCount: (totalUsersCount: number) => {
-        dispatch(SetTotalUsersCount(totalUsersCount))
-    },
-
-    setCurrentPage: (currentPage: number) => {
-        dispatch(SetCurrentPage(currentPage))
-    },
-
-    setFetching: (isFetching: boolean) => {
-        dispatch(SetFetching(isFetching))
-    }
-})*/
 
 export default connect(MapStateToProps, {
-    followUser, setUsers, setTotalUsersCount,
-    setCurrentPage, setFetching, setFollowingInProgress
+    followUser, setCurrentPage, setFollowingInProgress,
+    getUsers, followUserTC, unfollowUserTC
 })(UsersPageContainer)

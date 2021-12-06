@@ -1,6 +1,9 @@
+import { ThunkAction } from "redux-thunk";
 import {v1} from "uuid";
 import postAva from "../images/kermit.jpg";
 import {AllActionType, ProfilePageType, ProfileType} from "../types";
+import {RootState} from "./store";
+import {userAPI} from "../api/api";
 
 
 let initialState: ProfilePageType = {
@@ -83,5 +86,16 @@ function profileReducer(state: ProfilePageType = initialState, action: AllAction
 export const onPostChange = (text: string) => ({type: 'ON-POST-CHANGE', text: text} as const);
 export const addNewPost = () => ({type: 'ADD-NEW-POST'} as const);
 export const changeProfile = (profile: ProfileType) => ({type: 'CHANGE-PROFILE', profile} as const);
+
+//это getCertainUserThunkCreator
+
+export const getCertainUser = (userId: number): ThunkAction<Promise<void>, RootState, unknown, AllActionType> => {
+    return async (dispatch) => {
+        userAPI.getCertainUser(userId)
+            .then(data => {
+                dispatch(changeProfile(data));
+            })
+    }
+}
 
 export default profileReducer;

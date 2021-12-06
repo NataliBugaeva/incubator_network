@@ -1,4 +1,8 @@
 import {AllActionType, UsersPageType, UserType} from "../types";
+import {userAPI} from "../api/api";
+import {Dispatch} from "react";
+import { ThunkAction } from "redux-thunk";
+import {RootState} from "./store";
 
 let initialState: UsersPageType = {
     users: [],
@@ -55,5 +59,47 @@ export const setFollowingInProgress = (inProgress: boolean, userId: number) => (
     type: 'SET-FOLLOWING-IN-PROGRESS',
     inProgress, userId
 } as const);
+
+//export type getUsersThunkCreator = ReturnType <typeof getUsers>;
+
+//это getUsersThunkCreator
+export const getUsers = (pageSize: number, currentPage: number): ThunkAction<Promise<void>, RootState, unknown, AllActionType> => {
+    return async (dispatch) => {
+        dispatch(setFetching(true));
+        // instance.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`)
+        userAPI.getUsers(pageSize, currentPage)
+            .then(data => {
+               dispatch(setUsers(data.items));
+               dispatch(setTotalUsersCount(data.totalCount));
+               dispatch(setFetching(false));
+            })
+    }
+}
+
+//это followUserThunkCreator
+export const followUserTC = (id: number): ThunkAction<Promise<void>, RootState, unknown, AllActionType> => {
+    return async (dispatch) => {
+        userAPI.followUser(id)
+            .then(data => {
+                if(data.resultCode === 0) {
+                    dispatch(followUser(id));
+                }
+                dispatch(setFollowingInProgress(false, id));
+            })
+    }
+}
+
+//это unfollowUserThunkCreator
+export const unfollowUserTC = (id: number): ThunkAction<Promise<void>, RootState, unknown, AllActionType> => {
+    return async (dispatch) => {
+        userAPI.unfollowUser(id)
+            .then(data => {
+                if(data.resultCode === 0) {
+                    dispatch(followUser(id));
+                }
+                dispatch(setFollowingInProgress(false, id));
+            })
+    }
+}
 
 export default usersReducer;

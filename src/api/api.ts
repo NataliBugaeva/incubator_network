@@ -34,15 +34,13 @@ export const userAPI = {
         return (
             instance.delete(`follow/${id}`).then(response => response.data)
         )
-    },
+    }
+}
 
+export const authAPI = {
     authMe() {
         return (
             instance.get('auth/me').then(response => response.data)
         )
     }
-
-
 }
-
-

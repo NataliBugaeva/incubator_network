@@ -1,18 +1,17 @@
 import React from "react";
-import {ProfilePageType, ProfileType} from "../../types";
+import {ProfilePageType} from "../../types";
 import ProfilePage from "./ProfilePage";
-import {addNewPost, changeProfile, onPostChange} from "../../redux/profileReducer";
+import {addNewPost, getCertainUser, onPostChange} from "../../redux/profileReducer";
 import {connect} from "react-redux";
 import {RootState} from "../../redux/store";
 import {RouteComponentProps, withRouter } from "react-router-dom";
-import {userAPI} from "../../api/api";
 
 export type ProfilePageContainerPropsType = {
     profilePage: ProfilePageType,
     //userId: string,
     onPostChange: (value: string) => void,
     addNewPost: () => void,
-    changeProfile: (profile: ProfileType) => void,
+    getCertainUser: (userId: number) => void
 }
 
 export type ProfilePageContainerWithRouterPropsType = RouteComponentProps<{userId: string}>
@@ -24,10 +23,11 @@ class ProfilePageContainer extends React.Component<ProfilePageContainerWithRoute
 
 
         //instance.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-        userAPI.getCertainUser(userId)
-            .then(data => {
-                this.props.changeProfile(data);
-            })
+        this.props.getCertainUser(userId);
+        // userAPI.getCertainUser(userId)
+        //     .then(data => {
+        //         this.props.changeProfile(data);
+        //     })
     }
 
     render() {
@@ -48,4 +48,4 @@ let MapStateToProps = (state: RootState) => ({
 let ProfilePageContainerWithRouter = withRouter(ProfilePageContainer)
 
 export default connect(MapStateToProps, {onPostChange,
-    addNewPost, changeProfile})(ProfilePageContainerWithRouter);
+    addNewPost, getCertainUser})(ProfilePageContainerWithRouter);
