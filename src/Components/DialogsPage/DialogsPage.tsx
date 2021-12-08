@@ -7,7 +7,7 @@ import { Redirect } from "react-router-dom";
 
 function DialogsPage(props: {
     dialogsPage: DialogsPageType,
-    isAuth: boolean | null,
+   // isAuth: boolean | null,
     onChangeMessageText: (value: string) => void,
     onSendNewMessage: () => void
 }) {
@@ -29,7 +29,7 @@ function DialogsPage(props: {
                         message={elem.message} key={elem.id}/>
     })
 
-    if(!props.isAuth) return <Redirect to={'/login'}/>;
+   // if(!props.isAuth) return <Redirect to={'/login'}/>;
 
     return (
         <div className={s.dialogsPage}>

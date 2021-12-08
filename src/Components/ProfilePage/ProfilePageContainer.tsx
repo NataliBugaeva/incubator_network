@@ -4,18 +4,19 @@ import ProfilePage from "./ProfilePage";
 import {addNewPost, getCertainUser, onPostChange} from "../../redux/profileReducer";
 import {connect} from "react-redux";
 import {RootState} from "../../redux/store";
-import {Redirect, RouteComponentProps, withRouter } from "react-router-dom";
+import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 export type ProfilePageContainerPropsType = {
     profilePage: ProfilePageType,
-    isAuth: boolean | null,
+    //isAuth: boolean | null,
     //userId: string,
     onPostChange: (value: string) => void,
     addNewPost: () => void,
     getCertainUser: (userId: number) => void
 }
 
-export type ProfilePageContainerWithRouterPropsType = RouteComponentProps<{userId: string}>
+export type ProfilePageContainerWithRouterPropsType = RouteComponentProps<{ userId: string }>
     & ProfilePageContainerPropsType;
 
 class ProfilePageContainer extends React.Component<ProfilePageContainerWithRouterPropsType, {}> {
@@ -32,23 +33,27 @@ class ProfilePageContainer extends React.Component<ProfilePageContainerWithRoute
     }
 
     render() {
-        if(!this.props.isAuth) return <Redirect to={'/login'}/>
+        // if(!this.props.isAuth) return <Redirect to={'/login'}/>
         return (
-            <ProfilePage profilePage={this.props.profilePage}
+            <ProfilePage {...this.props}
+                         profilePage={this.props.profilePage}
                          onPostChange={this.props.onPostChange}
-                         addNewPost={this.props.addNewPost}/>
+                         addNewPost={this.props.addNewPost}
+            />
         )
     }
 }
 
 let MapStateToProps = (state: RootState) => ({
     profilePage: state.profilePage,
-    isAuth: state.authData.isAuth
-   // userId: state.profilePage.profile.userId
+    //isAuth: state.authData.isAuth
+    // userId: state.profilePage.profile.userId
 })
 
 
 let ProfilePageContainerWithRouter = withRouter(ProfilePageContainer)
 
-export default connect(MapStateToProps, {onPostChange,
-    addNewPost, getCertainUser})(ProfilePageContainerWithRouter);
+export default withAuthRedirect(connect(MapStateToProps, {
+    onPostChange,
+    addNewPost, getCertainUser
+})(ProfilePageContainerWithRouter));

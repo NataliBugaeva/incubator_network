@@ -12,6 +12,7 @@ export type ProfilePagePropsType = {
 }
 
 function ProfilePage(props: ProfilePagePropsType) {
+
     return (
         <div className={s.profilePage}>
             <div className={s.profilePage_img}>
