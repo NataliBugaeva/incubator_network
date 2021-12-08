@@ -7,15 +7,16 @@ import {UserAuthDataType} from "../../types";
 import {authAPI} from "../../api/api";
 
 export type HeaderContainerPropsType = {
-    id: number,
-    login: string,
+    isAuth: boolean | null,
+    id: number | null,
+    login: string | null,
     authMe: () => void
 }
 
 class HeaderContainer extends React.Component<HeaderContainerPropsType, {}> {
     componentDidMount() {
        // instance.get('https://social-network.samuraijs.com/api/1.0/auth/me')
-       this.props.authMe();
+      this.props.authMe();
 
         //  authAPI.authMe()
        //      .then(data => {
@@ -27,12 +28,13 @@ class HeaderContainer extends React.Component<HeaderContainerPropsType, {}> {
 
     render() {
         return (
-            <Header id={this.props.id} login={this.props.login}/>
+            <Header id={this.props.id} login={this.props.login} />
         )
     }
 }
 
 let MapStateToProps = (state: RootState) => ({
+    isAuth: state.authData.isAuth,
     id: state.authData.id,
     login: state.authData.login
 })

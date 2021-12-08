@@ -5,7 +5,8 @@ import {RootState} from "../../redux/store";
 import {connect} from "react-redux";
 
 let MapStateToProps = (state: RootState) => ({
-    dialogsPage: state.dialogsPage
+    dialogsPage: state.dialogsPage,
+    isAuth: state.authData.isAuth
 })
 
 let MapDispatchToProps = (dispatch: (action: AllActionType) => void) => ({

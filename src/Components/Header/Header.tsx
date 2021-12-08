@@ -2,8 +2,8 @@ import React from "react";
 import s from '../../styles/Header.module.css';
 
 export type HeaderPropsType = {
-    id: number,
-    login: string
+    id: number | null,
+    login: string | null
 }
 
 function Header(props: HeaderPropsType) {

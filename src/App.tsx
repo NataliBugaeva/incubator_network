@@ -10,6 +10,7 @@ import DialogsPageContainer from "./Components/DialogsPage/DialogsPageContainer"
 import SidebarContainer from "./Components/Sidebar/SidebarContainer";
 import UsersPageContainer from './Components/UsersPage/UsersPageContainer';
 import HeaderContainer from "./Components/Header/HeaderContainer";
+import Login from "./Components/Login/Login";
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                 <Route render={() => <SettingsPage/>} path='/settings'/>
                 <Route render={() => <FriendsPage/>} path='/friends'/>
                 <Route render={() => <UsersPageContainer/>} path='/users'/>
+                <Route render={() => <Login/>} path='/login'/>
             </div>
         </div>
     );

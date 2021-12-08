@@ -4,10 +4,11 @@ import ProfilePage from "./ProfilePage";
 import {addNewPost, getCertainUser, onPostChange} from "../../redux/profileReducer";
 import {connect} from "react-redux";
 import {RootState} from "../../redux/store";
-import {RouteComponentProps, withRouter } from "react-router-dom";
+import {Redirect, RouteComponentProps, withRouter } from "react-router-dom";
 
 export type ProfilePageContainerPropsType = {
     profilePage: ProfilePageType,
+    isAuth: boolean | null,
     //userId: string,
     onPostChange: (value: string) => void,
     addNewPost: () => void,
@@ -31,6 +32,7 @@ class ProfilePageContainer extends React.Component<ProfilePageContainerWithRoute
     }
 
     render() {
+        if(!this.props.isAuth) return <Redirect to={'/login'}/>
         return (
             <ProfilePage profilePage={this.props.profilePage}
                          onPostChange={this.props.onPostChange}
@@ -41,6 +43,7 @@ class ProfilePageContainer extends React.Component<ProfilePageContainerWithRoute
 
 let MapStateToProps = (state: RootState) => ({
     profilePage: state.profilePage,
+    isAuth: state.authData.isAuth
    // userId: state.profilePage.profile.userId
 })
 

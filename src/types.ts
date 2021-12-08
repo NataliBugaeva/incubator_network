@@ -100,9 +100,10 @@ export type UserType = {
 }
 
 export type UserAuthDataType = {
-    id: number,
-    email: string,
-    login: string
+    id: number | null,
+    email: string | null,
+    login: string | null,
+    isAuth: boolean | null
 }
 
 export type AllActionType =

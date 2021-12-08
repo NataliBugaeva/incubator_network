@@ -3,12 +3,17 @@ import {ThunkAction} from "redux-thunk";
 import {RootState} from "./store";
 import {authAPI} from "../api/api";
 
-let initialState = {} as UserAuthDataType;
+let initialState = {
+    id: null,
+    email: null,
+    login: null,
+    isAuth: false
+}
 
 export const authReducer = (state: UserAuthDataType = initialState, action: AllActionType): UserAuthDataType => {
     switch (action.type) {
         case "SET-USER-DATA": {
-            return {...state, ...action.data}
+            return {...state, ...action.data, isAuth: true}
         }
         default: return state;
     }

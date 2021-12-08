@@ -3,9 +3,11 @@ import s from './../../styles/DialogsPage.module.css';
 import Message from "./Message/Message";
 import Chat from "./Chat/Chat";
 import {DialogsPageType} from "../../types";
+import { Redirect } from "react-router-dom";
 
 function DialogsPage(props: {
     dialogsPage: DialogsPageType,
+    isAuth: boolean | null,
     onChangeMessageText: (value: string) => void,
     onSendNewMessage: () => void
 }) {
@@ -26,6 +28,8 @@ function DialogsPage(props: {
         return <Message id={elem.id} avatar={elem.avatar} name={elem.name} time={elem.time}
                         message={elem.message} key={elem.id}/>
     })
+
+    if(!props.isAuth) return <Redirect to={'/login'}/>;
 
     return (
         <div className={s.dialogsPage}>
