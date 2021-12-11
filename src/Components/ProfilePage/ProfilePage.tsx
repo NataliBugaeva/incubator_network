@@ -4,6 +4,7 @@ import city from './../../images/city2.jpg';
 import MyPosts from "./MyPosts/MyPosts";
 import {ProfilePageType} from "../../types";
 import About from "./AboutMe/AboutMe";
+import ProfileStatus from "../ProfileStatus/ProfileStatus";
 
 export type ProfilePagePropsType = {
     profilePage: ProfilePageType,
@@ -18,6 +19,7 @@ function ProfilePage(props: ProfilePagePropsType) {
             <div className={s.profilePage_img}>
                 <img src={city} alt="city"/>
             </div>
+            <ProfileStatus status={'Привет'}/>
             <About name={props.profilePage.profile.fullName}
                    aboutMe={props.profilePage.profile.aboutMe}
                    insta={props.profilePage.profile.contacts.instagram}

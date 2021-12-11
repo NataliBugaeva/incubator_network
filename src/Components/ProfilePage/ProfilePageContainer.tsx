@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {RootState} from "../../redux/store";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
 
 export type ProfilePageContainerPropsType = {
     profilePage: ProfilePageType,
@@ -51,9 +52,18 @@ let MapStateToProps = (state: RootState) => ({
 })
 
 
-let ProfilePageContainerWithRouter = withRouter(ProfilePageContainer)
+// let ProfilePageContainerWithRouter = withRouter(ProfilePageContainer)
+//
+// export default withAuthRedirect(connect(MapStateToProps, {
+//     onPostChange,
+//     addNewPost, getCertainUser
+// })(ProfilePageContainerWithRouter));
 
-export default withAuthRedirect(connect(MapStateToProps, {
-    onPostChange,
-    addNewPost, getCertainUser
-})(ProfilePageContainerWithRouter));
+export default compose<React.ComponentType>(
+    connect(MapStateToProps, {
+        onPostChange,
+        addNewPost, getCertainUser
+    }),
+    withAuthRedirect,
+    withRouter
+)(ProfilePageContainer)

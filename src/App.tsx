@@ -6,11 +6,11 @@ import MusicPage from "./Components/MusicPage/MusicPage";
 import SettingsPage from "./Components/SettingsPage/SettingsPage";
 import FriendsPage from "./Components/FriendsPage/FriendsPage";
 import ProfilePageContainer from "./Components/ProfilePage/ProfilePageContainer";
-import DialogsPageContainer from "./Components/DialogsPage/DialogsPageContainer";
 import SidebarContainer from "./Components/Sidebar/SidebarContainer";
 import UsersPageContainer from './Components/UsersPage/UsersPageContainer';
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import Login from "./Components/Login/Login";
+import DialogsPageContainer from "./Components/DialogsPage/DialogsPageContainer";
 
 function App() {
     return (
