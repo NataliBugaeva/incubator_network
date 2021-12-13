@@ -1,24 +1,31 @@
 import React from "react";
 
 export type ProfileStatusPropsType = {
-    status: string
+    status: string,
+    updateStatus: (status: string) => void
 }
 
 class ProfileStatus extends React.Component<ProfileStatusPropsType, {}> {
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
     }
 
-    activateEditMode() {
+    activateEditMode = () => {
         this.setState({
             editMode: true
         })
     }
 
-    deActivateEditMode() {
+    deActivateEditMode = () => {
         this.setState({
             editMode: false
-        })
+        });
+        this.props.updateStatus(this.state.status);
+    }
+
+    onChangeStatus = (e: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({status: e.currentTarget.value});
     }
 
     render() {
@@ -26,10 +33,16 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType, {}> {
             <div>
                 {this.state.editMode ?
                     <div>
-                        <input type="text" value={this.props.status} onBlur={this.deActivateEditMode.bind(this)} autoFocus={true}/>
+                        {/*у этого инпута value и onChangeStatus связаны с локальным стэйтом*/}
+                        {/*а изначально локальный стэйт status берет значение из пропсов (статус из глобального стэйта)*/}
+                        <input type="text"
+                               value={this.state.status}
+                               onChange={this.onChangeStatus}
+                               onBlur={this.deActivateEditMode}
+                               autoFocus={true}/>
                     </div> :
                     <div>
-                        <span onDoubleClick={this.activateEditMode.bind(this)}>{this.props.status}</span>
+                        <span onDoubleClick={this.activateEditMode}>{this.props.status || `no status`}</span>
                     </div>
                 }
             </div>

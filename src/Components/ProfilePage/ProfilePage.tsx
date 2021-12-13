@@ -9,7 +9,9 @@ import ProfileStatus from "../ProfileStatus/ProfileStatus";
 export type ProfilePagePropsType = {
     profilePage: ProfilePageType,
     onPostChange: (value: string) => void,
-    addNewPost: () => void
+    addNewPost: () => void,
+    status: string,
+    updateStatus: (status: string) => void
 }
 
 function ProfilePage(props: ProfilePagePropsType) {
@@ -19,12 +21,14 @@ function ProfilePage(props: ProfilePagePropsType) {
             <div className={s.profilePage_img}>
                 <img src={city} alt="city"/>
             </div>
-            <ProfileStatus status={'Привет'}/>
+            {/*<ProfileStatus status={'Привет'}/>*/}
             <About name={props.profilePage.profile.fullName}
                    aboutMe={props.profilePage.profile.aboutMe}
-                   insta={props.profilePage.profile.contacts.instagram}
-                   status={props.profilePage.profile.lookingForAJobDescription}
-                   avatar={props.profilePage.profile.photos.small}/>
+                //insta={props.profilePage.profile.contacts.instagram}
+                // status={props.profilePage.profile.lookingForAJobDescription}
+                   avatar={props.profilePage.profile.photos.small}
+                   status={props.status}
+                   updateStatus={props.updateStatus}/>
             <MyPosts myPosts={props.profilePage.myPosts}
                      newPostText={props.profilePage.newPostText}
                      onPostChange={props.onPostChange}

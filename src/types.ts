@@ -1,5 +1,5 @@
 import {onMessageTextChangeActionCreator, sendNewMessageActionCreator} from "./redux/dialogsReducer";
-import {addNewPost, changeProfile, onPostChange} from "./redux/profileReducer";
+import {addNewPost, changeProfile, onPostChange, setStatus} from "./redux/profileReducer";
 import {
     followUser,
     setCurrentPage,
@@ -15,6 +15,7 @@ export type ProfilePageType = {
     newPostText: string,
     //aboutMe: AboutMeType,
     myPosts: Array<PostType>,
+    status: string
 }
 
 export type ProfileContactsType = {
@@ -119,4 +120,4 @@ export type AllActionType =
     | ReturnType<typeof setFetching>
     | ReturnType<typeof setUserData>
     | ReturnType<typeof setFollowingInProgress>
-
+    | ReturnType<typeof setStatus>

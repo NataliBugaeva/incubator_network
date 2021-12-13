@@ -3,7 +3,7 @@ import {v1} from "uuid";
 import postAva from "../images/kermit.jpg";
 import {AllActionType, ProfilePageType, ProfileType} from "../types";
 import {RootState} from "./store";
-import {userAPI} from "../api/api";
+import {profileAPI, userAPI} from "../api/api";
 
 
 let initialState: ProfilePageType = {
@@ -55,6 +55,7 @@ let initialState: ProfilePageType = {
             ava: postAva
         }
     ],
+    status: ''
 }
 
 function profileReducer(state: ProfilePageType = initialState, action: AllActionType): ProfilePageType {
@@ -77,6 +78,10 @@ function profileReducer(state: ProfilePageType = initialState, action: AllAction
             return {...state, profile: action.profile}
         }
 
+        case "SET-STATUS": {
+            return {...state, status: action.status}
+        }
+
         default:
             return state;
     }
@@ -87,13 +92,37 @@ export const onPostChange = (text: string) => ({type: 'ON-POST-CHANGE', text: te
 export const addNewPost = () => ({type: 'ADD-NEW-POST'} as const);
 export const changeProfile = (profile: ProfileType) => ({type: 'CHANGE-PROFILE', profile} as const);
 
-//это getCertainUserThunkCreator
+export const setStatus = (status: string) => ({type: 'SET-STATUS', status}as const);
 
-export const getCertainUser = (userId: number): ThunkAction<Promise<void>, RootState, unknown, AllActionType> => {
+//это getProfileThunkCreator
+
+export const getProfile = (userId: number): ThunkAction<Promise<void>, RootState, unknown, AllActionType> => {
     return async (dispatch) => {
-        userAPI.getCertainUser(userId)
+        profileAPI.getProfile(userId)
             .then(data => {
                 dispatch(changeProfile(data));
+            })
+    }
+}
+
+//это getStatusThunkCreator
+export const getStatus = (userId: number): ThunkAction<Promise<void>, RootState, unknown, AllActionType> => {
+    return async (dispatch) => {
+        profileAPI.getStatus(userId)
+            .then(data => {
+                dispatch(setStatus(data));
+            })
+    }
+}
+
+//это updateStatusThunkCreator
+export const updateStatus = (status: string): ThunkAction<Promise<void>, RootState, unknown, AllActionType> => {
+    return async (dispatch) => {
+        profileAPI.updateStatus(status)
+            .then(response => {
+                if(!response.data.resultCode) {
+                    dispatch(setStatus(status));
+                }
             })
     }
 }

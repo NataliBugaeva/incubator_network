@@ -1,7 +1,7 @@
 import React from "react";
 import {ProfilePageType} from "../../types";
 import ProfilePage from "./ProfilePage";
-import {addNewPost, getCertainUser, onPostChange} from "../../redux/profileReducer";
+import {addNewPost, getProfile, getStatus, onPostChange, updateStatus} from "../../redux/profileReducer";
 import {connect} from "react-redux";
 import {RootState} from "../../redux/store";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
@@ -10,11 +10,14 @@ import { compose } from "redux";
 
 export type ProfilePageContainerPropsType = {
     profilePage: ProfilePageType,
+    status: string,
     //isAuth: boolean | null,
     //userId: string,
     onPostChange: (value: string) => void,
     addNewPost: () => void,
-    getCertainUser: (userId: number) => void
+    getProfile: (userId: number) => void,
+    getStatus: (userId: number) => void,
+    updateStatus: (status: string) => void
 }
 
 export type ProfilePageContainerWithRouterPropsType = RouteComponentProps<{ userId: string }>
@@ -26,11 +29,13 @@ class ProfilePageContainer extends React.Component<ProfilePageContainerWithRoute
 
 
         //instance.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-        this.props.getCertainUser(userId);
-        // userAPI.getCertainUser(userId)
+        this.props.getProfile(userId);
+        // userAPI.getProfile(userId)
         //     .then(data => {
         //         this.props.changeProfile(data);
         //     })
+
+        this.props.getStatus(userId);
     }
 
     render() {
@@ -40,6 +45,8 @@ class ProfilePageContainer extends React.Component<ProfilePageContainerWithRoute
                          profilePage={this.props.profilePage}
                          onPostChange={this.props.onPostChange}
                          addNewPost={this.props.addNewPost}
+                         status={this.props.status}
+                         updateStatus={this.props.updateStatus}
             />
         )
     }
@@ -47,6 +54,7 @@ class ProfilePageContainer extends React.Component<ProfilePageContainerWithRoute
 
 let MapStateToProps = (state: RootState) => ({
     profilePage: state.profilePage,
+    status: state.profilePage.status
     //isAuth: state.authData.isAuth
     // userId: state.profilePage.profile.userId
 })
@@ -56,13 +64,13 @@ let MapStateToProps = (state: RootState) => ({
 //
 // export default withAuthRedirect(connect(MapStateToProps, {
 //     onPostChange,
-//     addNewPost, getCertainUser
+//     addNewPost, getProfile
 // })(ProfilePageContainerWithRouter));
 
 export default compose<React.ComponentType>(
     connect(MapStateToProps, {
         onPostChange,
-        addNewPost, getCertainUser
+        addNewPost, getProfile, getStatus, updateStatus
     }),
     withAuthRedirect,
     withRouter
