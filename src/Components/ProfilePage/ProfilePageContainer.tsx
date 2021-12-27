@@ -1,7 +1,7 @@
 import React from "react";
 import {ProfilePageType} from "../../types";
 import ProfilePage from "./ProfilePage";
-import {addNewPost, getProfile, getStatus, onPostChange, updateStatus} from "../../redux/profileReducer";
+import {addNewPost, getProfile, getStatus, updateStatus} from "../../redux/profileReducer";
 import {connect} from "react-redux";
 import {RootState} from "../../redux/store";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
@@ -13,7 +13,7 @@ export type ProfilePageContainerPropsType = {
     status: string,
     //isAuth: boolean | null,
     //userId: string,
-    onPostChange: (value: string) => void,
+    //onPostChange: (value: string) => void,
     addNewPost: () => void,
     getProfile: (userId: number) => void,
     getStatus: (userId: number) => void,
@@ -43,7 +43,7 @@ class ProfilePageContainer extends React.Component<ProfilePageContainerWithRoute
         return (
             <ProfilePage {...this.props}
                          profilePage={this.props.profilePage}
-                         onPostChange={this.props.onPostChange}
+                        // onPostChange={this.props.onPostChange}
                          addNewPost={this.props.addNewPost}
                          status={this.props.status}
                          updateStatus={this.props.updateStatus}
@@ -69,7 +69,7 @@ let MapStateToProps = (state: RootState) => ({
 
 export default compose<React.ComponentType>(
     connect(MapStateToProps, {
-        onPostChange,
+        // onPostChange,
         addNewPost, getProfile, getStatus, updateStatus
     }),
     withAuthRedirect,

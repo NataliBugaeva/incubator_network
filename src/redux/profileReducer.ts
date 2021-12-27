@@ -28,7 +28,9 @@ let initialState: ProfilePageType = {
             large: postAva,
         }
     },
-    newPostText: '',
+  //  newPostText: '',
+
+
     // aboutMe: {
     //     name: 'Natasha Bugaeva',
     //     birthDate: '26 of December',
@@ -60,19 +62,28 @@ let initialState: ProfilePageType = {
 
 function profileReducer(state: ProfilePageType = initialState, action: AllActionType): ProfilePageType {
     switch (action.type) {
+        // case 'ADD-NEW-POST': {
+        //     let newPost = {
+        //         id: v1(),
+        //         name: state.newPostText,
+        //         likesCount: 0,
+        //         ava: postAva
+        //     }
+        //     return {...state, myPosts: [newPost, ...state.myPosts], newPostText: ''}
+        // }
         case 'ADD-NEW-POST': {
             let newPost = {
                 id: v1(),
-                name: state.newPostText,
+                name: action.newPostText,
                 likesCount: 0,
                 ava: postAva
             }
-            return {...state, myPosts: [newPost, ...state.myPosts], newPostText: ''}
+            return {...state, myPosts: [newPost, ...state.myPosts]}
         }
 
-        case 'ON-POST-CHANGE': {
-            return {...state, newPostText: action.text}
-        }
+        // case 'ON-POST-CHANGE': {
+        //     return {...state, newPostText: action.text}
+        // }
 
         case 'CHANGE-PROFILE': {
             return {...state, profile: action.profile}
@@ -88,8 +99,12 @@ function profileReducer(state: ProfilePageType = initialState, action: AllAction
 }
 
 
-export const onPostChange = (text: string) => ({type: 'ON-POST-CHANGE', text: text} as const);
-export const addNewPost = () => ({type: 'ADD-NEW-POST'} as const);
+//export const onPostChange = (text: string) => ({type: 'ON-POST-CHANGE', text: text} as const);
+
+
+export const addNewPost = (newPostText: string) => ({type: 'ADD-NEW-POST', newPostText} as const);
+
+
 export const changeProfile = (profile: ProfileType) => ({type: 'CHANGE-PROFILE', profile} as const);
 
 export const setStatus = (status: string) => ({type: 'SET-STATUS', status}as const);

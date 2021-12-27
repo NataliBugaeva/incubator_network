@@ -8,8 +8,8 @@ import ProfileStatus from "../ProfileStatus/ProfileStatus";
 
 export type ProfilePagePropsType = {
     profilePage: ProfilePageType,
-    onPostChange: (value: string) => void,
-    addNewPost: () => void,
+    //onPostChange: (value: string) => void,
+    addNewPost: (newPostText: string) => void,
     status: string,
     updateStatus: (status: string) => void
 }
@@ -30,8 +30,8 @@ function ProfilePage(props: ProfilePagePropsType) {
                    status={props.status}
                    updateStatus={props.updateStatus}/>
             <MyPosts myPosts={props.profilePage.myPosts}
-                     newPostText={props.profilePage.newPostText}
-                     onPostChange={props.onPostChange}
+                     //newPostText={props.profilePage.newPostText}
+                     //onPostChange={props.onPostChange}
                      onAddNewPost={props.addNewPost}/>
         </div>
     )

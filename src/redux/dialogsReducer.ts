@@ -3,7 +3,7 @@ import {v1} from "uuid";
 import ava from "../images/ava.jpg";
 import {AllActionType, DialogsPageType} from "../types";
 
-const ON_MESSAGE_TEXT_CHANGE = 'ON-MESSAGE-TEXT-CHANGE';
+// const ON_MESSAGE_TEXT_CHANGE = 'ON-MESSAGE-TEXT-CHANGE';
 const SEND_NEW_MESSAGE = 'SEND-NEW-MESSAGE';
 
 let initialState: DialogsPageType = {
@@ -52,7 +52,7 @@ let initialState: DialogsPageType = {
             name: 'Jon'
         }
     ],
-    messageText: ''
+   // messageText: ''
 }
 
 
@@ -60,18 +60,20 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: AllAction
     let minutes = new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes();
 
     switch (action.type) {
-        case ON_MESSAGE_TEXT_CHANGE:
-            return {...state, messageText: action.text}
+        // case ON_MESSAGE_TEXT_CHANGE:
+        //     return {...state, messageText: action.text}
 
         case SEND_NEW_MESSAGE:
             let newMessage = {
                 id: v1(),
                 avatar: ava,
                 name: 'Natali',
-                message: state.messageText,
+                //message: state.messageText,
+                message: action.messageText,
                 time: `${new Date().getHours()} : ${minutes}`
             };
-            return {...state, messages: [...state.messages, newMessage], messageText: ''}
+            // return {...state, messages: [...state.messages, newMessage], messageText: ''}
+            return {...state, messages: [...state.messages, newMessage]}
 
 
         default:
@@ -79,11 +81,11 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: AllAction
     }
 }
 
-export const onMessageTextChangeActionCreator = (text: string) => ({
-    type: ON_MESSAGE_TEXT_CHANGE,
-    text: text
-} as const);
+// export const onMessageTextChangeActionCreator = (text: string) => ({
+//     type: ON_MESSAGE_TEXT_CHANGE,
+//     text: text
+// } as const);
 
-export const sendNewMessageActionCreator = () => ({type: SEND_NEW_MESSAGE} as const);
+export const sendNewMessageActionCreator = (messageText: string) => ({type: SEND_NEW_MESSAGE, messageText} as const);
 
 export default dialogsReducer;

@@ -1,6 +1,6 @@
 import {AllActionType, DialogsPageType} from "../../types";
-import {onMessageTextChangeActionCreator, sendNewMessageActionCreator} from "../../redux/dialogsReducer";
-import DialogsPage from "./DialogsPage";
+import {sendNewMessageActionCreator} from "../../redux/dialogsReducer";
+import {DialogsPage} from "./DialogsPage";
 import {RootState} from "../../redux/store";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
@@ -13,11 +13,11 @@ let MapStateToProps = (state: RootState) => ({
 })
 
 let MapDispatchToProps = (dispatch: (action: AllActionType) => void) => ({
-    onChangeMessageText: (value: string) => {
-        dispatch(onMessageTextChangeActionCreator(value))
-    },
-    onSendNewMessage: () => {
-        dispatch(sendNewMessageActionCreator())
+    // onChangeMessageText: (value: string) => {
+    //     dispatch(onMessageTextChangeActionCreator(value))
+    // },
+    onSendNewMessage: (messageText: string) => {
+        dispatch(sendNewMessageActionCreator(messageText))
     }
 })
 

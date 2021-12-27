@@ -1,5 +1,5 @@
-import {onMessageTextChangeActionCreator, sendNewMessageActionCreator} from "./redux/dialogsReducer";
-import {addNewPost, changeProfile, onPostChange, setStatus} from "./redux/profileReducer";
+import {sendNewMessageActionCreator} from "./redux/dialogsReducer";
+import {addNewPost, changeProfile, setStatus} from "./redux/profileReducer";
 import {
     followUser,
     setCurrentPage,
@@ -12,7 +12,7 @@ import {setUserData} from "./redux/authReducer";
 
 export type ProfilePageType = {
     profile: ProfileType,
-    newPostText: string,
+   // newPostText: string,
     //aboutMe: AboutMeType,
     myPosts: Array<PostType>,
     status: string
@@ -58,7 +58,7 @@ export type PostType = {
 export type DialogsPageType = {
     chats: Array<ChatType>,
     messages: Array<MessageType>,
-    messageText: string
+   // messageText: string
 }
 export type MessageType = {
     id: string,
@@ -108,10 +108,10 @@ export type UserAuthDataType = {
 }
 
 export type AllActionType =
-    | ReturnType<typeof onMessageTextChangeActionCreator>
+  //  | ReturnType<typeof onMessageTextChangeActionCreator>
     | ReturnType<typeof sendNewMessageActionCreator>
     | ReturnType<typeof addNewPost>
-    | ReturnType<typeof onPostChange>
+   // | ReturnType<typeof onPostChange>
     | ReturnType<typeof changeProfile>
     | ReturnType<typeof followUser>
     | ReturnType<typeof setUsers>
