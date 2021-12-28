@@ -5,6 +5,8 @@ import Chat from "./Chat/Chat";
 import {DialogsPageType} from "../../types";
 import { Redirect } from "react-router-dom";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {Textarea} from "../FormsControls/FormsControl";
+import {maxLengthCreator, required} from "../../utils/validators/validators";
 
 export function DialogsPage(props: {
     dialogsPage: DialogsPageType,
@@ -65,10 +67,15 @@ export type AddMessageFormDataType = {
     newMessage: string
 }
 
+const maxLength = maxLengthCreator(50);
+
 export const AddMessageForm: React.FC<InjectedFormProps<AddMessageFormDataType>> = (props) => {
     return (
         <form className={s.newMessage} onSubmit={props.handleSubmit}>
-            <Field component={'textarea'} name={'newMessage'} placeholder={'enter your message...'}/>
+            {/*<Field component={'textarea'} name={'newMessage'} placeholder={'enter your message...'}/>*/}
+            <Field component={Textarea}
+                   validate={[required, maxLength]}
+                   name={'newMessage'} placeholder={'enter your message...'}/>
             <button>Send</button>
             {/*<textarea onChange={onChangeMessageText}*/}
             {/*          placeholder='enter your message...'*/}
